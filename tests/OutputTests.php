@@ -31,7 +31,6 @@ class OutputTests extends TestCase
 
     public function test()
     {
-        $this->markTestSkipped();
         $messageBag = new MessageBag();
         $manager = new Localization($messageBag);
 
@@ -41,8 +40,8 @@ class OutputTests extends TestCase
 
         $this->assertStringContainsString('Fixed all files in', $manager->fixCodeStyle(
             self::LANG_DIR_PATH.'/fr/message.php',
-            ['align_double_arrow', 'short_array_syntax'],
-            'psr2'
+            ['array_syntax' => ['syntax' => 'short']],
+            '@PSR2'
         ));
 
         /** @noinspection PhpIncludeInspection */
@@ -59,7 +58,7 @@ class OutputTests extends TestCase
 
         $manager->fixCodeStyle(
             self::LANG_DIR_PATH.'/file_does_not_exist',
-            ['align_double_arrow', 'short_array_syntax']
+            ['array_syntax' => ['syntax' => 'short']]
         );
     }
 }

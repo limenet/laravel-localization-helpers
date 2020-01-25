@@ -4,7 +4,7 @@ namespace Potsky\LaravelLocalizationHelpers\Factory;
 
 use Config;
 use Illuminate\Support\Arr;
-use Symfony\Component\Console\Application;
+use PhpCsFixer\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 
@@ -16,104 +16,9 @@ class Localization
     const PREFIX_LARAVEL_CONFIG = 'laravel-localization-helpers.';
     const JSON_HEADER = '//JSON//';
 
-    private static $PHP_CS_FIXER_LEVELS = ['psr0', 'psr1', 'psr2', 'symfony'];
+    private static $PHP_CS_FIXER_LEVELS = ['@PhpCsFixer', '@PhpCsFixer:risky', '@PSR1', '@PSR2', '@Symfony', '@Symfony:risky'];
     private static $PHP_CS_FIXER_FIXERS = [
-        'psr0',
-        'encoding',
-        'short_tag',
-        'braces',
-        'elseif',
-        'eof_ending',
-        'function_call_space',
-        'function_declaration',
-        'indentation',
-        'line_after_namespace',
-        'linefeed',
-        'lowercase_constants',
-        'lowercase_keywords',
-        'method_argument_space',
-        'multiple_use',
-        'parenthesis',
-        'php_closing_tag',
-        'single_line_after_imports',
-        'trailing_spaces',
-        'visibility',
-        'array_element_no_space_before_comma',
-        'array_element_white_space_after_comma',
-        'blankline_after_open_tag',
-        'concat_without_spaces',
-        'double_arrow_multiline_whitespaces',
-        'duplicate_semicolon',
-        'empty_return',
-        'extra_empty_lines',
-        'function_typehint_space',
-        'include',
-        'join_function',
-        'list_commas',
-        'multiline_array_trailing_comma',
-        'namespace_no_leading_whitespace',
-        'new_with_braces',
-        'no_blank_lines_after_class_opening',
-        'no_empty_lines_after_phpdocs',
-        'object_operator',
-        'operators_spaces',
-        'phpdoc_indent',
-        'phpdoc_inline_tag',
-        'phpdoc_no_access',
-        'phpdoc_no_empty_return',
-        'phpdoc_no_package',
-        'phpdoc_params',
-        'phpdoc_scalar',
-        'phpdoc_separation',
-        'phpdoc_short_description',
-        'phpdoc_to_comment',
-        'phpdoc_trim',
-        'phpdoc_type_to_var',
-        'phpdoc_types',
-        'phpdoc_var_without_name',
-        'pre_increment',
-        'print_to_echo',
-        'remove_leading_slash_use',
-        'remove_lines_between_uses',
-        'return',
-        'self_accessor',
-        'short_bool_cast',
-        'single_array_no_trailing_comma',
-        'single_blank_line_before_namespace',
-        'single_quote',
-        'spaces_before_semicolon',
-        'spaces_cast',
-        'standardize_not_equal',
-        'ternary_spaces',
-        'trim_array_spaces',
-        'unalign_double_arrow',
-        'unalign_equals',
-        'unary_operators_spaces',
-        'unneeded_control_parentheses',
-        'unused_use',
-        'whitespacy_lines',
-        'align_double_arrow',
-        'align_equals',
-        'concat_with_spaces',
-        'echo_to_print',
-        'ereg_to_preg',
-        'header_comment',
-        'logical_not_operators_with_spaces',
-        'logical_not_operators_with_successor_space',
-        'long_array_syntax',
-        'multiline_spaces_before_semicolon',
-        'newline_after_open_tag',
-        'no_blank_lines_before_namespace',
-        'ordered_use',
-        'php4_constructor',
-        'php_unit_construct',
-        'php_unit_strict',
-        'phpdoc_order',
-        'phpdoc_var_to_type',
-        'short_array_syntax',
-        'short_echo_tag',
-        'strict',
-        'strict_param',
+       'align_multiline_comment', 'allow_single_line_closure', 'array_indentation', 'array_syntax', 'before_array_assignments_colon', 'binary_operator_spaces', 'blank_line_after_namespace', 'blank_line_after_opening_tag', 'blank_line_before_statement', 'braces', 'cast_spaces', 'class_attributes_separation', 'class_definition', 'combine_consecutive_issets', 'combine_consecutive_unsets', 'combine_nested_dirname', 'comment_types', 'compact_nullable_typehint', 'concat_space', 'constant_case', 'declare_equal_normalize', 'declare_strict_types', 'dir_constant', 'doctrine_annotation_array_assignment', 'doctrine_annotation_braces', 'doctrine_annotation_indentation', 'doctrine_annotation_spaces', 'elseif', 'encoding', 'ereg_to_preg', 'error_suppression', 'escape_implicit_backslashes', 'explicit_indirect_variable', 'explicit_string_variable', 'final_internal_class', 'fix_built_in', 'fopen_flag_order', 'fopen_flags', 'full_opening_tag', 'fully_qualified_strict_types', 'function_declaration', 'function_to_constant', 'function_typehint_space', 'heredoc_indentation', 'heredoc_to_nowdoc', 'implode_call', 'include', 'increment_style', 'indentation_type', 'is_null', 'line_ending', 'logical_operators', 'lowercase_cast', 'lowercase_keywords', 'lowercase_static_reference', 'magic_constant_casing', 'magic_method_casing', 'method_argument_space', 'method_chaining_indentation', 'modernize_types_casting', 'mt_rand', 'multiline_comment_opening_closing', 'multiline_whitespace_before_semicolons', 'native_constant_invocation', 'native_function_casing', 'native_function_invocation', 'native_function_type_declaration_casing', 'new_with_braces', 'no_alias_functions', 'no_alternative_syntax', 'no_binary_string', 'no_blank_lines_after_class_opening', 'no_break_comment', 'no_closing_tag', 'no_empty_comment', 'no_empty_statement', 'no_extra_blank_lines', 'no_homoglyph_names', 'no_leading_import_slash', 'no_leading_namespace_whitespace', 'no_mixed_echo_print', 'no_multiline_whitespace_around_double_arrow', 'no_null_property_initialization', 'no_short_bool_cast', 'no_short_echo_tag', 'no_singleline_whitespace_before_semicolons', 'no_spaces_after_function_name', 'no_spaces_around_offset', 'no_spaces_inside_parenthesis', 'no_superfluous_elseif', 'no_trailing_comma_in_list_call', 'no_trailing_comma_in_singleline_array', 'no_trailing_whitespace_in_comment', 'no_trailing_whitespace', 'no_unneeded_control_parentheses', 'no_unneeded_curly_braces', 'no_unneeded_final_method', 'no_unreachable_default_argument_value', 'no_unset_cast', 'no_unset_on_property', 'no_unused_imports', 'no_useless_else', 'no_useless_return', 'no_whitespace_before_comma_in_array', 'no_whitespace_in_blank_line', 'non_printable_character', 'normalize_index_brace', 'null_adjustment', 'object_operator_without_whitespace', 'operator', 'ordered_class_elements', 'ordered_imports', 'pow_to_exponentiation', 'protected_to_private', 'psr4', 'rand', 'random_api_migration', 'remove_in_empty_for_expressions', 'return_assignment', 'return_type_declaration', 'scope', 'self_accessor', 'semicolon_after_instruction', 'set_type_to_cast', 'short_scalar_cast', 'simple_to_complex_string_variable', 'single_blank_line_at_eof', 'single_blank_line_before_namespace', 'single_class_element_per_statement', 'single_import_per_statement', 'single_line_after_imports', 'single_line_comment_style', 'single_line_throw', 'single_quote', 'single_trait_insert_per_statement', 'sort_algorithm', 'space_after_semicolon', 'standardize_increment', 'standardize_not_equals', 'statements', 'strict_comparison', 'strict_param', 'strict', 'string_line_ending', 'switch_case_semicolon_to_colon', 'switch_case_space', 'tags', 'ternary_operator_spaces', 'ternary_to_null_coalescing', 'trailing_comma_in_multiline_array', 'trim_array_spaces', 'unary_operator_spaces', 'use_escape_sequences_in_strings', 'visibility_required', 'void_return', 'whitespace_after_comma_in_array', 'yoda_style',
     ];
 
     /** @var TranslatorInterface $translator */
@@ -641,38 +546,31 @@ class Localization
      */
     public function fixCodeStyle($filePath, array $fixers, $level = null)
     {
-        if ((defined('HHVM_VERSION_ID')) && (HHVM_VERSION_ID < 30500)) {
-            // @codeCoverageIgnoreStart
-            throw new Exception('HHVM needs to be a minimum version of HHVM 3.5.0');
-        }
-        // @codeCoverageIgnoreEnd
-
-        elseif (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50306) {
-            // @codeCoverageIgnoreStart
-            throw new Exception('PHP needs to be a minimum version of PHP 5.3.6');
-        }
-        // @codeCoverageIgnoreEnd
-
         if (!file_exists($filePath)) {
             throw new Exception('File "'.$filePath.'" does not exist, cannot fix it');
         }
 
         $options = [
-            '--no-interaction' => true,
-            'command'          => 'fix',
-            'path'             => $filePath,
+            'command' => 'fix',
+            'path'    => [$filePath],
         ];
 
         $fix = [];
-        foreach ($fixers as $fixer) {
-            if ($this->isAFixer($fixer)) {
-                $fix[] = $fixer;
+        foreach ($fixers as $key => $value) {
+            if(is_int($key)){
+                if ($this->isAFixer($value)) {
+                    $fix[$value] = true;
+                }
+                continue;
+            }
+            if ($this->isAFixer($key)) {
+                $fix[$key] = $value;
             }
         }
-        $options['--fixers'] = implode(',', $fix);
+        $options['--rules'] = json_encode($fix);
 
         if ($this->isALevel($level)) {
-            $options['--level'] = $level;
+            $fix[$level] = true;
         }
 
         $input = new ArrayInput($options);

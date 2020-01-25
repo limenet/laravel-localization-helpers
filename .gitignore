@@ -6,3 +6,4 @@ coverage
 _ide_helper.php
 cs_fixer_tmp_*
 .phpunit.result.cache
+.php_cs.cache
