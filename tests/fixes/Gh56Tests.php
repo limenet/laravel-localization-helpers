@@ -22,7 +22,7 @@ class Gh56Tests extends TestCase
 	 * - Remove all previous lang files before each test
 	 * - Set custom configuration paths
 	 */
-	public function setUp()
+	public function setUp() : void
 	{
 		parent::setUp();
 
@@ -104,7 +104,7 @@ class Gh56Tests extends TestCase
 		$lemmas = require( self::$langFileEn );
 
 		$this->assertArrayHasKey( "message..." , $lemmas );
-		$this->assertInternalType( 'string' , $lemmas[ 'message...' ] );
+		$this->assertIsString( 'string' , $lemmas[ 'message...' ] );
 
 		$lemmas = file_get_contents( self::$langFileJsonEn );
 		$this->assertJson( $lemmas );

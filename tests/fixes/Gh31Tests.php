@@ -18,7 +18,7 @@ class Gh31Tests extends TestCase
 	 * - Remove all previous lang files before each test
 	 * - Set custom configuration paths
 	 */
-	public function setUp()
+	public function setUp() : void
 	{
 		parent::setUp();
 

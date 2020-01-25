@@ -10,7 +10,7 @@ class CommandFindTests extends TestCase
 	 *
 	 * - Set custom configuration paths
 	 */
-	public function setUp()
+	public function setUp() : void
 	{
 		parent::setUp();
 

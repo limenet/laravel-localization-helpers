@@ -11,7 +11,7 @@ class CommandClearTests extends TestCase
 	 * - Remove all previous lang files before each test
 	 * - Create 10 backup files, one per day
 	 */
-	public function setUp()
+	public function setUp() : void
 	{
 		parent::setUp();
 
@@ -104,7 +104,7 @@ class CommandClearTests extends TestCase
 		$return = Artisan::call( 'localization:clear' , array( '--dry-run' => true ) );
 
 		$this->assertEquals( 1 , $return );
-		$this->assertContains( 'No lang folder found in your custom path:' , Artisan::output() );
+		$this->assertStringContainsString( 'No lang folder found in your custom path:' , Artisan::output() );
 	}
 
 	/**

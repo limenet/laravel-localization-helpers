@@ -11,7 +11,7 @@ class TestCase extends Orchestra\Testbench\TestCase
 	/**
 	 *
 	 */
-	public static function setUpBeforeClass()
+	public static function setUpBeforeClass() : void
 	{
 		parent::setUpBeforeClass();
 	}
@@ -19,7 +19,7 @@ class TestCase extends Orchestra\Testbench\TestCase
 	/**
 	 *
 	 */
-	public static function tearDownAfterClass()
+	public static function tearDownAfterClass() : void
 	{
 		parent::tearDownAfterClass();
 	}
@@ -27,7 +27,7 @@ class TestCase extends Orchestra\Testbench\TestCase
 	/**
 	 *
 	 */
-	public function tearDown()
+	public function tearDown() : void
 	{
 		Mockery::close();
 	}
