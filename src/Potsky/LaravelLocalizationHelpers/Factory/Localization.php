@@ -4,6 +4,7 @@ use Config;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\CS\Console\Application;
+use Illuminate\Support\Arr;
 
 class Localization
 {
@@ -292,7 +293,7 @@ class Localization
 		$result = array();
 		$string = Tools::minifyString( file_get_contents( $path ) );
 
-		foreach ( array_flatten( $trans_methods ) as $method )
+		foreach ( Arr::flatten( $trans_methods ) as $method )
 		{
 			preg_match_all( $method , $string , $matches );
 
