@@ -28,14 +28,14 @@ class CommandMissingTests extends TestCase
             'short_array_syntax',
         ]);
 
-		/*
+        /*
         // Remove all saved access token for translation API
         $translator = new \MicrosoftTranslator\Client([
             'api_client_id'     => true,
             'api_client_secret' => true,
         ]);
-		$translator->getAuth()->getGuard()->deleteAllAccessTokens();
-		*/
+        $translator->getAuth()->getGuard()->deleteAllAccessTokens();
+        */
     }
 
     /**

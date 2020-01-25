@@ -4,9 +4,9 @@ namespace Potsky\LaravelLocalizationHelpers\Factory;
 
 use Config;
 use Illuminate\Support\Arr;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Application;
 
 class Localization
 {
