@@ -4,6 +4,8 @@ namespace Potsky\LaravelLocalizationHelpers\Command;
 
 use Config;
 use Illuminate\Config\Repository;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Potsky\LaravelLocalizationHelpers\Factory\Exception;
 use Potsky\LaravelLocalizationHelpers\Factory\LangFile;
 use Potsky\LaravelLocalizationHelpers\Factory\Localization;
@@ -12,8 +14,6 @@ use Potsky\LaravelLocalizationHelpers\Object\LangFileAbstract;
 use Potsky\LaravelLocalizationHelpers\Object\LangFileGenuine;
 use Potsky\LaravelLocalizationHelpers\Object\LangFileJson;
 use Symfony\Component\Console\Input\InputOption;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 
 class LocalizationMissing extends LocalizationAbstract
 {
