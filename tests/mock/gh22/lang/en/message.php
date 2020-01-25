@@ -1,9 +1,10 @@
 <?php
-return array(
-	'my dog is rich' => 'My dog is rich' ,
-	'section'        => array(
-		1 => array(
-			'name' => 'Niania',
-		),
-	),
-);
+
+return [
+    'my dog is rich' => 'My dog is rich',
+    'section'        => [
+        1 => [
+            'name' => 'Niania',
+        ],
+    ],
+];

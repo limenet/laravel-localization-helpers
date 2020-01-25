@@ -4,16 +4,15 @@ namespace Potsky\LaravelLocalizationHelpers\Object;
 
 class LangFileTypeGenuine extends LangFileTypeAbstract
 {
-	/**
-	 * LangFileTypeGenuine constructor.
-	 *
-	 * @param string $lang
-	 */
-	public function __construct( $lang )
-	{
-		parent::__construct( $lang );
+    /**
+     * LangFileTypeGenuine constructor.
+     *
+     * @param string $lang
+     */
+    public function __construct($lang)
+    {
+        parent::__construct($lang);
 
-		$this->setTypeJson( false )->setTypeVendor( false );
-	}
-
+        $this->setTypeJson(false)->setTypeVendor(false);
+    }
 }

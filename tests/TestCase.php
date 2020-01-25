@@ -2,44 +2,34 @@
 
 class TestCase extends Orchestra\Testbench\TestCase
 {
-	const MOCK_DIR_PATH           = 'tests/mock';
-	const MOCK_DIR_PATH_GLOBAL    = 'tests/mock/global';
-	const MOCK_DIR_PATH_WO_LEMMA  = 'tests/mock/wo_lemma';
-	const LANG_DIR_PATH           = 'tests/lang';
-	const ORCHESTRA_LANG_DIR_PATH = 'vendor/orchestra/testbench/fixture/resources/lang';
+    const MOCK_DIR_PATH = 'tests/mock';
+    const MOCK_DIR_PATH_GLOBAL = 'tests/mock/global';
+    const MOCK_DIR_PATH_WO_LEMMA = 'tests/mock/wo_lemma';
+    const LANG_DIR_PATH = 'tests/lang';
+    const ORCHESTRA_LANG_DIR_PATH = 'vendor/orchestra/testbench/fixture/resources/lang';
 
-	/**
-	 *
-	 */
-	public static function setUpBeforeClass() : void
-	{
-		parent::setUpBeforeClass();
-	}
+    public static function setUpBeforeClass(): void
+    {
+        parent::setUpBeforeClass();
+    }
 
-	/**
-	 *
-	 */
-	public static function tearDownAfterClass() : void
-	{
-		parent::tearDownAfterClass();
-	}
+    public static function tearDownAfterClass(): void
+    {
+        parent::tearDownAfterClass();
+    }
 
-	/**
-	 *
-	 */
-	public function tearDown() : void
-	{
-		Mockery::close();
-	}
+    public function tearDown(): void
+    {
+        Mockery::close();
+    }
 
-	/**
-	 * Get package providers.
-	 *
-	 * @return array
-	 */
-	protected function getPackageProviders( $app )
-	{
-		return array( 'Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider' );
-	}
+    /**
+     * Get package providers.
+     *
+     * @return array
+     */
+    protected function getPackageProviders($app)
+    {
+        return ['Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider'];
+    }
 }
-

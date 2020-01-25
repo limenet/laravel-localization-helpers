@@ -1,4 +1,4 @@
 <?php
 
-$i = __( 'message...' );
-$i = __( 'message.message...' );
+$i = __('message...');
+$i = __('message.message...');

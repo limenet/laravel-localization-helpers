@@ -1,5 +1,5 @@
 <?php
 
 $i = trans(
-	'things.foo'
+    'things.foo'
 );

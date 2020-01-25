@@ -1,8 +1,8 @@
 <?php
 
-return array(
-	'foo' => [
-		'bar' => 'bar' ,
-		'baz' => 'baz' ,
-	],
-);
+return [
+    'foo' => [
+        'bar' => 'bar',
+        'baz' => 'baz',
+    ],
+];

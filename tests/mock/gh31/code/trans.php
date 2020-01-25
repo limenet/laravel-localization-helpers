@@ -1,3 +1,3 @@
 <?php
 
-$i = Lang::get( 'message.hello' );
+$i = Lang::get('message.hello');

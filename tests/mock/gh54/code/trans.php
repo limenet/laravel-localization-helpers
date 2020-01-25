@@ -1,3 +1,3 @@
 <?php
 
-$i = Lang::get( 'message.Lang files are created when using dry-run' );
+$i = Lang::get('message.Lang files are created when using dry-run');

@@ -4,11 +4,11 @@ use Potsky\LaravelLocalizationHelpers\Factory\Localization;
 
 class Gh21Tests extends TestCase
 {
-	private static $langFolder;
+    private static $langFolder;
 
-	private static $langFile;
+    private static $langFile;
 
-	private static $defaultLangContent = "<?php
+    private static $defaultLangContent = "<?php
 return array(
 	'section'        => array(
 		1 => array(
@@ -20,7 +20,7 @@ return array(
 	),
 );";
 
-	private static $defaultLangWithObsoleteContent = "<?php
+    private static $defaultLangWithObsoleteContent = "<?php
 return array (
 	'section' => array (
 		1 => array (
@@ -36,72 +36,67 @@ return array (
 	),
 );";
 
+    /**
+     * Setup the test environment.
+     *
+     * - Remove all previous lang files before each test
+     * - Set custom configuration paths
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
 
+        self::$langFolder = self::MOCK_DIR_PATH.'/gh21/lang';
+        self::$langFile = self::$langFolder.'/en/message.php';
 
-	/**
-	 * Setup the test environment.
-	 *
-	 * - Remove all previous lang files before each test
-	 * - Set custom configuration paths
-	 */
-	public function setUp() : void
-	{
-		parent::setUp();
+        Config::set(Localization::PREFIX_LARAVEL_CONFIG.'lang_folder_path', self::$langFolder);
 
-		self::$langFolder = self::MOCK_DIR_PATH . '/gh21/lang';
-		self::$langFile   = self::$langFolder . '/en/message.php';
+        // Set content in lang file
+        File::put(self::$langFile, self::$defaultLangContent);
+    }
 
-		Config::set( Localization::PREFIX_LARAVEL_CONFIG . 'lang_folder_path' , self::$langFolder );
+    /**
+     * https://github.com/potsky/laravel-localization-helpers/issues/21.
+     */
+    public function testObsoleteSubKeyRemoved()
+    {
+        Config::set(Localization::PREFIX_LARAVEL_CONFIG.'folders', self::MOCK_DIR_PATH.'/gh21/code');
 
-		// Set content in lang file
-		File::put( self::$langFile , self::$defaultLangContent );
-	}
+        /** @noinspection PhpVoidFunctionResultUsedInspection */
+        Artisan::call('localization:missing', [
+            '--no-interaction' => true,
+            '--no-backup'      => true,
+            '--verbose'        => true,
+            '--no-date'        => true,
+        ]);
 
+        $this->assertContains('1 obsolete string', Artisan::output());
 
-	/**
-	 * https://github.com/potsky/laravel-localization-helpers/issues/21
-	 */
-	public function testObsoleteSubKeyRemoved()
-	{
-		Config::set( Localization::PREFIX_LARAVEL_CONFIG . 'folders' , self::MOCK_DIR_PATH . '/gh21/code' );
+        $this->assertArrayHasKey('LLH:obsolete', require(self::$langFile));
+    }
 
-		/** @noinspection PhpVoidFunctionResultUsedInspection */
-		Artisan::call( 'localization:missing' , array(
-			'--no-interaction' => true ,
-			'--no-backup'      => true ,
-			'--verbose'        => true ,
-			'--no-date'        => true ,
-		) );
+    /**
+     * https://github.com/potsky/laravel-localization-helpers/issues/21.
+     */
+    public function testObsoleteAreKept()
+    {
+        Config::set(Localization::PREFIX_LARAVEL_CONFIG.'folders', self::MOCK_DIR_PATH.'/gh21/code');
 
-		$this->assertContains( '1 obsolete string' , Artisan::output() );
+        // Set content in lang file with obsolete lemma
+        File::put(self::$langFile, self::$defaultLangWithObsoleteContent);
 
-		$this->assertArrayHasKey( 'LLH:obsolete' ,  require( self::$langFile ) );
-	}
+        /** @noinspection PhpVoidFunctionResultUsedInspection */
+        Artisan::call('localization:missing', [
+            '--no-interaction' => true,
+            '--no-backup'      => true,
+            '--no-date'        => true,
+        ]);
 
+        $this->assertContains('1 obsolete string', Artisan::output());
 
-	/**
-	 * https://github.com/potsky/laravel-localization-helpers/issues/21
-	 */
-	public function testObsoleteAreKept()
-	{
-		Config::set( Localization::PREFIX_LARAVEL_CONFIG . 'folders' , self::MOCK_DIR_PATH . '/gh21/code' );
+        $lemmas = require self::$langFile;
 
-		// Set content in lang file with obsolete lemma
-		File::put( self::$langFile , self::$defaultLangWithObsoleteContent );
-
-		/** @noinspection PhpVoidFunctionResultUsedInspection */
-		Artisan::call( 'localization:missing' , array(
-			'--no-interaction' => true ,
-			'--no-backup'      => true ,
-			'--no-date'        => true ,
-		) );
-
-		$this->assertContains( '1 obsolete string' , Artisan::output() );
-
-		$lemmas = require( self::$langFile );
-
-		$this->assertArrayHasKey( 'LLH:obsolete' ,  $lemmas );
-		$this->assertArrayNotHasKey( 'LLH:obsolete' ,  $lemmas['LLH:obsolete'] );
-	}
-
+        $this->assertArrayHasKey('LLH:obsolete', $lemmas);
+        $this->assertArrayNotHasKey('LLH:obsolete', $lemmas['LLH:obsolete']);
+    }
 }

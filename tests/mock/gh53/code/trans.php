@@ -1,3 +1,3 @@
 <?php
 
-$i = Lang::get( 'pages/master/home.offers.message.' . strval('message') );
+$i = Lang::get('pages/master/home.offers.message.'.strval('message'));

@@ -1,3 +1,3 @@
 <?php
 
-$i = trans( 'message.lemma1' );
+$i = trans('message.lemma1');

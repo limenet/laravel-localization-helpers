@@ -4,79 +4,79 @@ namespace Potsky\LaravelLocalizationHelpers\Object;
 
 abstract class LangFileTypeAbstract
 {
-	protected $typeVendor;
+    protected $typeVendor;
 
-	protected $typeJson;
+    protected $typeJson;
 
-	protected $lang;
+    protected $lang;
 
-	/**
-	 * LangFileTypeAbstract constructor.
-	 *
-	 * @param string $lang
-	 */
-	public function __construct( $lang )
-	{
-		$this->setLang( $lang );
-	}
+    /**
+     * LangFileTypeAbstract constructor.
+     *
+     * @param string $lang
+     */
+    public function __construct($lang)
+    {
+        $this->setLang($lang);
+    }
 
-	/**
-	 * @param boolean $typeVendor
-	 *
-	 * @return LangFileAbstract
-	 */
-	public function setTypeVendor( $typeVendor )
-	{
-		$this->typeVendor = $typeVendor;
+    /**
+     * @param bool $typeVendor
+     *
+     * @return LangFileAbstract
+     */
+    public function setTypeVendor($typeVendor)
+    {
+        $this->typeVendor = $typeVendor;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return boolean
-	 */
-	public function getTypeVendor()
-	{
-		return $this->typeVendor;
-	}
+    /**
+     * @return bool
+     */
+    public function getTypeVendor()
+    {
+        return $this->typeVendor;
+    }
 
-	/**
-	 * @param boolean $typeJson
-	 *
-	 * @return LangFileAbstract
-	 */
-	public function setTypeJson( $typeJson )
-	{
-		$this->typeJson = $typeJson;
+    /**
+     * @param bool $typeJson
+     *
+     * @return LangFileAbstract
+     */
+    public function setTypeJson($typeJson)
+    {
+        $this->typeJson = $typeJson;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return boolean
-	 */
-	public function getTypeJson()
-	{
-		return $this->typeJson;
-	}
+    /**
+     * @return bool
+     */
+    public function getTypeJson()
+    {
+        return $this->typeJson;
+    }
 
-	/**
-	 * @param mixed $lang
-	 *
-	 * @return LangFileAbstract
-	 */
-	public function setLang( $lang )
-	{
-		$this->lang = $lang;
+    /**
+     * @param mixed $lang
+     *
+     * @return LangFileAbstract
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getLang()
-	{
-		return $this->lang;
-	}
+    /**
+     * @return mixed
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
 }

@@ -4,5 +4,5 @@
 // and a new string is used now
 
 $i = trans(
-	'things.bar'
+    'things.bar'
 );
