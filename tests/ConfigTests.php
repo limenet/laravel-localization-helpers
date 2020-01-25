@@ -6,13 +6,13 @@ class ConfigTests extends TestCase
     {
         /** @noinspection PhpIncludeInspection */
         $config = include 'src/config/config.php';
-        $this->assertIsArray('array', $config);
+        $this->assertIsArray($config);
     }
 
     public function testLaravel5Config()
     {
         /** @noinspection PhpIncludeInspection */
         $config = include 'src/config/config-laravel5.php';
-        $this->assertIsArray('array', $config);
+        $this->assertIsArray($config);
     }
 }

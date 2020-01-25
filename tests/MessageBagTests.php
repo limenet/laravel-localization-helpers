@@ -16,7 +16,7 @@ class MessageBagTests extends TestCase
         $messages = $messageBag->getMessages();
 
         $this->assertTrue($messageBag->hasMessages());
-        $this->assertIsArray('array', $messages);
+        $this->assertIsArray($messages);
 
         $message = current($messages);
         $this->assertEquals(MessageBag::INFO, $messageBag->getMessageType($message));

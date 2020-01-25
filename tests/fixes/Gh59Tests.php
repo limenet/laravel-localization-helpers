@@ -75,10 +75,10 @@ class Gh59Tests extends TestCase
         $lemmas = require self::$langFile;
 
         $this->assertArrayHasKey('Hello. How are you?', $lemmas);
-        $this->assertIsString('string', $lemmas['Hello. How are you?']);
+        $this->assertIsString($lemmas['Hello. How are you?']);
 
         $this->assertArrayHasKey('hello...', $lemmas);
-        $this->assertIsString('string', $lemmas['hello...']);
+        $this->assertIsString($lemmas['hello...']);
 
         $this->assertArrayHasKey('Hello', $lemmas);
         $this->assertArrayHasKey('How are you?', $lemmas['Hello']);

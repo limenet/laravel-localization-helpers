@@ -102,7 +102,7 @@ class Gh56Tests extends TestCase
         $lemmas = require self::$langFileEn;
 
         $this->assertArrayHasKey('message...', $lemmas);
-        $this->assertIsString('string', $lemmas['message...']);
+        $this->assertIsString($lemmas['message...']);
 
         $lemmas = file_get_contents(self::$langFileJsonEn);
         $this->assertJson($lemmas);
