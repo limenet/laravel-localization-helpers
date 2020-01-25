@@ -8,15 +8,15 @@
   ],
   "license": "GPL-3.0+",
   "require": {
-    "illuminate/support": "^5.5 || ^6.0",
+    "illuminate/support": "^6.0",
     "friendsofphp/php-cs-fixer": "^2.0",
     "potsky/microsoft-translator-php-sdk": "*"
   },
   "require-dev": {
-    "orchestra/testbench": "3.4.*",
-    "phpunit/phpunit": "^4.0||^5.0",
-    "mockery/mockery": "^0.9",
-    "satooshi/php-coveralls": "dev-master"
+    "orchestra/testbench": "^4.0",
+    "phpunit/phpunit": "^8.0",
+    "mockery/mockery": "^1.0",
+    "php-coveralls/php-coveralls": "^2.2"
   },
   "autoload": {
     "classmap": [
