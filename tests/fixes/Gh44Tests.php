@@ -39,7 +39,7 @@ class Gh44Tests extends TestCase
     {
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'lang_folder_path', self::$langFolder);
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'folders', self::MOCK_DIR_PATH.'/gh44/code');
-        Config::set(Localization::PREFIX_LARAVEL_CONFIG.'ignore_lang_files', ['validation', 'tests/mock/gh44/lang/fr/potsky.php']);
+		Config::set(Localization::PREFIX_LARAVEL_CONFIG.'ignore_lang_files', ['validation', 'tests/mock/gh44/lang/fr/potsky.php']);
 
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         Artisan::call('localization:missing', [
@@ -48,7 +48,7 @@ class Gh44Tests extends TestCase
             '--verbose'        => true,
             '--no-date'        => true,
             '--no-comment'     => true,
-        ]);
+		]);
 
         $this->assertFileNotExists(self::$langValidationEnFile);
         $this->assertFileNotExists(self::$langValidationFrFile);

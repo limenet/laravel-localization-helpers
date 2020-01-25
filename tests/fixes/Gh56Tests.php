@@ -82,7 +82,7 @@ class Gh56Tests extends TestCase
 
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'lang_folder_path', self::$langFolder);
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'folders', self::MOCK_DIR_PATH.'/gh56/code');
-        Config::set(Localization::PREFIX_LARAVEL_CONFIG.'dot_notation_split_regex', '/\\.(?=[^ .!?])/');
+        //Config::set(Localization::PREFIX_LARAVEL_CONFIG.'dot_notation_split_regex', '/\\.(?=[^ .!?])/');
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'json_languages', ['en', 'fr']);
 
         /** @noinspection PhpVoidFunctionResultUsedInspection */
@@ -92,6 +92,7 @@ class Gh56Tests extends TestCase
             '--verbose'        => true,
             '--no-date'        => true,
             '--no-comment'     => true,
+            '--verbose'     => true,
         ]);
 
         $this->assertFileNotExists(self::$langFileIncorrectGenuine);
@@ -101,8 +102,8 @@ class Gh56Tests extends TestCase
 
         $lemmas = require self::$langFileEn;
 
-        $this->assertArrayHasKey('message...', $lemmas);
-        $this->assertIsString($lemmas['message...']);
+        $this->assertArrayHasKey('any_message', $lemmas);
+        $this->assertIsString($lemmas['any_message']);
 
         $lemmas = file_get_contents(self::$langFileJsonEn);
         $this->assertJson($lemmas);

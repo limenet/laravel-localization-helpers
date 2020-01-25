@@ -496,8 +496,11 @@ class LocalizationMissing extends LocalizationAbstract
                 if ($this->option('output-flat')) {
                     $final_lemmas = Arr::dot($final_lemmas);
                 }
-
                 if (($something_to_do === true) || ($this->option('force'))) {
+                    if($lang_file->getTypeJson()){
+                        unset($final_lemmas['POTSKY___NEW___POTSKY']);
+                        $file_content = json_encode($final_lemmas);
+                    }else{
                     $content = var_export($final_lemmas, true);
                     $content = preg_replace("@'POTSKY___COMMENT___POTSKY[0-9]*' => '(.*)',@", '// $1', $content);
                     $content = str_replace(
@@ -524,6 +527,7 @@ class LocalizationMissing extends LocalizationAbstract
                     }
 
                     $file_content .= "\nreturn ".$content.';';
+                }
                     $job[$lang_file->getFilePath()] = $file_content;
                 } else {
                     if ($this->option('verbose')) {
@@ -532,7 +536,6 @@ class LocalizationMissing extends LocalizationAbstract
                 }
             }
         }
-
         ///////////////////////////////////////////
         // Silent mode                           //
         // only return an exit code on new lemma //

@@ -1,18 +1,23 @@
 <?php
 
-return [
-    //==================================== Translations ====================================//
-    'section' => [
-        1 => [
-            'name' => 'First lady',
-        ],
-    ],
-    //================================== Obsolete strings ==================================//
-    'LLH:obsolete' => [
-        'section' => [
-            2 => [
-                'name' => 'Second to die',
-            ],
-        ],
-    ],
-];
+return array (
+  //==================================== Translations ====================================//
+  'section' => 
+  array (
+    1 => 
+    array (
+      'name' => 'First lady',
+    ),
+  ),
+  //================================== Obsolete strings ==================================//
+  'LLH:obsolete' => 
+  array (
+    'section' => 
+    array (
+      2 => 
+      array (
+        'name' => 'Second to die',
+      ),
+    ),
+  ),
+);

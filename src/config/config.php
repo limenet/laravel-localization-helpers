@@ -16,9 +16,9 @@ return [
     | No error or exception is thrown when a folder does not exist.
     |
     */
-    'folders'                  => [
-        '%APP/views',
-        '%APP/controllers',
+    'folders'             => [
+        '%BASE/resources/views',
+        '%APP/Http/Controllers',
     ],
 
     /*
@@ -32,7 +32,7 @@ return [
     | - a specific file path like '/resources/lang/de/cms.php'
     |
     */
-    'ignore_lang_files'        => [
+    'ignore_lang_files'   => [
         'validation',
     ],
 
@@ -47,7 +47,7 @@ return [
     | - then  in base_path() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'lang',
     |
     */
-    'lang_folder_path'         => null,
+    'lang_folder_path'    => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -58,7 +58,11 @@ return [
     | Several regular expressions can be used for a single method or function.
     |
     */
-    'trans_methods'            => [
+    'trans_methods'       => [
+        'json'        => [
+            '@__\(\s*(\'.*\')\s*(,.*)*\)@U',
+            '@__\(\s*(".*")\s*(,.*)*\)@U',
+        ],
         'trans'        => [
             '@trans\(\s*(\'.*\')\s*(,.*)*\)@U',
             '@trans\(\s*(".*")\s*(,.*)*\)@U',
@@ -89,6 +93,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | JSON languages
+    |--------------------------------------------------------------------------
+    |
+    | You must set languages you want to generate in JSON format
+    |
+    | JSON langages are supported since Laravel 5.4
+    | https://laravel.com/docs/5.4/localization#using-translation-strings-as-keys
+    |
+    */
+    'json_languages' => [
+        'en',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Keywords for obsolete check
     |--------------------------------------------------------------------------
     |
@@ -111,7 +130,7 @@ return [
     |   translation files.
     |
     */
-    'never_obsolete_keys'      => [
+    'never_obsolete_keys' => [
         'dynamic',
         'fields',
     ],
@@ -138,7 +157,7 @@ return [
     | clean up obsolete lemma manually
     |
     */
-    'obsolete_array_key'       => 'LLH:obsolete',
+    'obsolete_array_key'  => 'LLH:obsolete',
 
     /*
     |--------------------------------------------------------------------------
@@ -148,7 +167,7 @@ return [
     | when using option editor, package will use this command to open your files
     |
     */
-    'editor_command_line'      => '/Applications/Sublime\\ Text.app/Contents/SharedSupport/bin/subl',
+    'editor_command_line' => '/Applications/Sublime\\ Text.app/Contents/SharedSupport/bin/subl',
 
     /*
     |--------------------------------------------------------------------------
@@ -261,7 +280,7 @@ return [
     |
     | If both parameters are empty, no Code Style will be applied
     */
-    'code_style'               => [
+    'code_style'          => [
         'level'  => null,
         'fixers' => [],
     ],
@@ -271,10 +290,10 @@ return [
     | Translator
     |--------------------------------------------------------------------------
     |
-    | Use the Microsoft translator by default. This is the only translator available now
+    | Use the Microsoft translator by default. This is the only available translator now
     |
     */
-    'translator'               => 'Microsoft',
+    'translator'          => 'Sample',
 
     /*
     |--------------------------------------------------------------------------
@@ -309,7 +328,7 @@ return [
     | - LLH_MICROSOFT_TRANSLATOR_CLIENT_SECRET
     |
     */
-    'translators'              => [
+    'translators'         => [
         'Microsoft' => [
             'default_language' => null,
             'client_id'        => null,

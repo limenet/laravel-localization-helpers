@@ -5,7 +5,7 @@ use Potsky\LaravelLocalizationHelpers\Factory\Tools;
 
 class CommandMissingTests extends TestCase
 {
-    private static $langFile;
+	private static $langFile;
 
     /**
      * Setup the test environment.
@@ -27,15 +27,6 @@ class CommandMissingTests extends TestCase
             'align_double_arrow',
             'short_array_syntax',
         ]);
-
-		/*
-        // Remove all saved access token for translation API
-        $translator = new \MicrosoftTranslator\Client([
-            'api_client_id'     => true,
-            'api_client_secret' => true,
-        ]);
-		$translator->getAuth()->getGuard()->deleteAllAccessTokens();
-		*/
     }
 
     /**
@@ -47,12 +38,11 @@ class CommandMissingTests extends TestCase
     public function testLangFileDoesNotExist()
     {
         /** @noinspection PhpVoidFunctionResultUsedInspection */
-        $return = Artisan::call('localization:missing', ['--no-interaction' => true]);
+        $return = Artisan::call('localization:missing', ['--no-interaction' => true, '--verbose' => true]);
         $result = Artisan::output();
 
         $this->assertEquals(0, $return);
         $this->assertStringContainsString('File has been created', $result);
-        $this->assertStringContainsString('OUPS', $result);
 
         /** @noinspection PhpIncludeInspection */
         $lemmas = include self::LANG_DIR_PATH.'/fr/message.php';
@@ -95,10 +85,8 @@ class CommandMissingTests extends TestCase
     {
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'lang_folder_path', null);
 
-        @mkdir(self::ORCHESTRA_LANG_DIR_PATH);
-        /** @noinspection PhpVoidFunctionResultUsedInspection */
-        $return = Artisan::call('localization:missing', ['--no-interaction' => true]);
-        unlink(self::ORCHESTRA_LANG_DIR_PATH.'/en/message.php');
+		/** @noinspection PhpVoidFunctionResultUsedInspection */
+		$return = Artisan::call('localization:missing', ['--no-interaction' => true]);
 
         $this->assertEquals(0, $return);
         $this->assertStringContainsString('Drink a Piña colada and/or smoke Super Skunk, you have nothing to do!', Artisan::output());
@@ -165,7 +153,6 @@ class CommandMissingTests extends TestCase
      */
     public function testTranslations()
     {
-        $this->markTestSkipped();
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         $return = Artisan::call('localization:missing', [
             '--no-interaction' => true,
@@ -177,8 +164,8 @@ class CommandMissingTests extends TestCase
 
         /** @noinspection PhpIncludeInspection */
         $lemmas = include self::LANG_DIR_PATH.'/fr/message.php';
-        $this->assertEquals('TODO: chien', $lemmas['dog']);
-        $this->assertEquals('TODO: chien', $lemmas['child.dog']);
+        $this->assertEquals('TODO: fr(): dog', $lemmas['dog']);
+        $this->assertEquals('TODO: fr(): dog', $lemmas['child.dog']);
     }
 
     /**
@@ -261,20 +248,5 @@ class CommandMissingTests extends TestCase
         // Exit code is 1 because there are new lemma to translate
         $this->assertEquals(1, $return);
         $this->assertEmpty(Artisan::output());
-    }
-
-    public function testTranslationsNotConfigured()
-    {
-        Config::set(Localization::PREFIX_LARAVEL_CONFIG.'translators.Microsoft.client_id', 'dumb');
-        Config::set(Localization::PREFIX_LARAVEL_CONFIG.'translators.Microsoft.client_secret', 'dumber');
-
-        $this->expectException('\\MicrosoftTranslator\\Exception');
-
-        /** @noinspection PhpVoidFunctionResultUsedInspection */
-        Artisan::call('localization:missing', [
-            '--no-interaction' => true,
-            '--output-flat'    => true,
-            '--translation'    => true,
-        ]);
     }
 }

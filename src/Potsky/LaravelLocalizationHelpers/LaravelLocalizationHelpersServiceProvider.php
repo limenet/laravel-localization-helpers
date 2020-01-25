@@ -24,7 +24,7 @@ class LaravelLocalizationHelpersServiceProvider extends ServiceProvider
     {
         if (function_exists('config_path')) {
             $this->publishes([
-                __DIR__.'/../../config/config-laravel5.php' => config_path('laravel-localization-helpers.php'),
+                __DIR__.'/../../config/config.php' => config_path('laravel-localization-helpers.php'),
             ]);
         }
     }
@@ -61,7 +61,7 @@ class LaravelLocalizationHelpersServiceProvider extends ServiceProvider
         });
 
         $this->mergeConfigFrom(
-            __DIR__.'/../../config/config-laravel5.php', 'laravel-localization-helpers'
+            __DIR__.'/../../config/config.php', 'laravel-localization-helpers'
         );
     }
 }

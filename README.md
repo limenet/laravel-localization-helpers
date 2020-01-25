@@ -1,5 +1,4 @@
-Laravel Localization Helpers
-============================
+# Laravel Localization Helpers
 
 [![Latest Stable Version](https://poser.pugx.org/potsky/laravel-localization-helpers/v/stable.svg)](https://packagist.org/packages/potsky/laravel-localization-helpers)
 [![Latest Unstable Version](https://poser.pugx.org/potsky/laravel-localization-helpers/v/unstable.svg)](https://packagist.org/packages/potsky/laravel-localization-helpers)
@@ -29,41 +28,40 @@ LLH is a set of artisan commands to manage translations in your Laravel project.
 
 - Choose your version according to the version compatibility matrix:
 
-| Laravel  | Lumen    | Package
-|:---------|:---------|:----------
-| 4.2.x    |          | 2.0.x (EOL last version is 2.0.4)
-| 5.0.x    |          | 2.1.x
-| 5.1.x    | 5.1.x    | 2.2.x
-| 5.2.x    | 5.2.x    | 2.3.x
-| 5.3.x    | 5.3.x    | 2.4.x
-| 5.4.x    | 5.4.x    | 2.5.x
+| Laravel | Lumen | Package                           |
+| :------ | :---- | :-------------------------------- |
+| 4.2.x   |       | 2.0.x (EOL last version is 2.0.4) |
+| 5.0.x   |       | 2.1.x                             |
+| 5.1.x   | 5.1.x | 2.2.x                             |
+| 5.2.x   | 5.2.x | 2.3.x                             |
+| 5.3.x   | 5.3.x | 2.4.x                             |
+| 5.4.x   | 5.4.x | 2.5.x                             |
 
 - Add the following line in the `require-dev` array of the `composer.json` file and replace the version if needed according to your Laravel version:
-    ```php
-    "potsky/laravel-localization-helpers" : "2.5.*"
-    ```
+
+  ```php
+  "potsky/laravel-localization-helpers" : "2.5.*"
+  ```
 
 - Update your installation : `composer update`
 - For Laravel, add the following line in the `providers` array of the `config/app.php` configuration file :
-    ```php
-    Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
-    ```
+
+  ```php
+  Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
+  ```
 
 - For Lumen, add the following lines in the `bootstrap/app.php` file :
-	```php
-	$app->register( Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class );
-	$app->configure('laravel-localization-helpers');
-	```
+  `php $app->register( Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class ); $app->configure('laravel-localization-helpers');`
 
-- Now execute `php artisan list` and you should view the new *localization* commands:
-    ```
-    ...
-    localization
-    localization:clear          Remove lang backup files
-    localization:find           Display all files where the argument is used as a lemma
-    localization:missing        Parse all translations in app directory and build all lang files
-    ...
-    ```
+- Now execute `php artisan list` and you should view the new _localization_ commands:
+  ```
+  ...
+  localization
+  localization:clear          Remove lang backup files
+  localization:find           Display all files where the argument is used as a lemma
+  localization:missing        Parse all translations in app directory and build all lang files
+  ...
+  ```
 
 In Laravel, you can add the facade in the Aliases if you need to manage translations in your code :
 
@@ -87,7 +85,7 @@ config/laravel-localization-helpers.php
 
 Add new folders to search for, add your own lang methods or functions, ...
 
-> For Lumen, copy manually the [configuration file](https://github.com/potsky/laravel-localization-helpers/blob/master/src/config/config-laravel5.php) as `config/laravel-localization-helpers.php`.
+> For Lumen, copy manually the [configuration file](https://github.com/potsky/laravel-localization-helpers/blob/master/src/config/config.php) as `config/laravel-localization-helpers.php`.
 
 ### Backup files
 
@@ -108,7 +106,7 @@ This command parses all your code and generates translations according to lang f
 
 Use `php artisan help localization:missing` for more informations about options.
 
-#### *Examples*
+#### _Examples_
 
 ##### Generate all lang files
 
@@ -216,13 +214,13 @@ php artisan localization:missing -r
 php artisan localization:missing -e
 ```
 
-You can edit the editor path in your configuration file. By default, editor is *Sublime Text* on *Mac OS X* :
+You can edit the editor path in your configuration file. By default, editor is _Sublime Text_ on _Mac OS X_ :
 
 ```php
 'editor_command_line' => '/Applications/Sublime\\ Text.app/Contents/SharedSupport/bin/subl'
 ```
 
-For *PHPStorm* on *Mac OS X*:
+For _PHPStorm_ on _Mac OS X_:
 
 ```php
 'editor_command_line' => '/usr/local/bin/phpstorm'
@@ -234,7 +232,7 @@ This command will search in all your code for the argument as a lemma.
 
 Use `php artisan help localization:find` for more informations about options.
 
-#### *Examples*
+#### _Examples_
 
 ##### Find regular lemma
 
@@ -269,7 +267,7 @@ This command will remove all backup lang files.
 
 Use `php artisan help localization:clear` for more informations about options.
 
-#### *Examples*
+#### _Examples_
 
 ##### Remove all backups
 
@@ -341,10 +339,7 @@ Use the [github issue tool](https://github.com/potsky/laravel-localization-helpe
 - new option to specify output formatting ([#17](https://github.com/potsky/laravel-localization-helpers/issues/17))
 - new option to specify flat arrays style output ([#18](https://github.com/potsky/laravel-localization-helpers/issues/18))
 - new option to let the command translate sentences for you with Bing Translator
-- new translations are now:
-	- marked with the `TODO:` prefix by default (*if you ran two times the missing artisan command without translating lemma next to the first run, your missing translation were lost in the lang file. Now by default, just search for TODO in your lang file!*)
-	- translated of course if option `t` is used
-	- shorten to their minimal value ( `trans( 'message.child.this is a text' )` will now generate `['child'] => 'TODO: this is a text',` and no more `['child'] => 'TODO: child.this is a text',`)   
+- new translations are now: - marked with the `TODO:` prefix by default (_if you ran two times the missing artisan command without translating lemma next to the first run, your missing translation were lost in the lang file. Now by default, just search for TODO in your lang file!_) - translated of course if option `t` is used - shorten to their minimal value ( `trans( 'message.child.this is a text' )` will now generate `['child'] => 'TODO: this is a text',` and no more `['child'] => 'TODO: child.this is a text',`)
 
 Internally :
 
