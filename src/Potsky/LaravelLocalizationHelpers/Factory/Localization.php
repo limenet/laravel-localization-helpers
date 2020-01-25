@@ -6,7 +6,7 @@ use Config;
 use Illuminate\Support\Arr;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\CS\Console\Application;
+use Symfony\Component\Console\Application;
 
 class Localization
 {
@@ -611,7 +611,7 @@ class Localization
         if (is_null($this->translator)) {
             /** @var string $translator */
             $translator = config(self::PREFIX_LARAVEL_CONFIG.'translator');
-            $this->translator = new Translator('Microsoft', [
+            $this->translator = new Translator(config(self::PREFIX_LARAVEL_CONFIG.'translator'), [
                 'client_id'        => config(self::PREFIX_LARAVEL_CONFIG.'translators.'.$translator.'.client_id'),
                 'client_secret'    => config(self::PREFIX_LARAVEL_CONFIG.'translators.'.$translator.'.client_secret'),
                 'default_language' => config(self::PREFIX_LARAVEL_CONFIG.'translators.'.$translator.'.default_language'),

@@ -13,7 +13,6 @@ Laravel Localization Helpers
 LLH is a set of artisan commands to manage translations in your Laravel project. Key features :
 
 - parse your code and generate lang files
-- translate your sentences automatically, thanks to Microsoft Translator API
 - configure output according to your code style
 
 ## Table of contents
