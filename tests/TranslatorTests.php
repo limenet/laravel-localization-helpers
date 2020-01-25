@@ -49,7 +49,7 @@ class TranslatorTests extends TestCase
 
     public function testNoCredentialsClientId()
     {
-        $this->setExpectedException('\\Potsky\\LaravelLocalizationHelpers\\Factory\\Exception', 'Please provide a client_id for Microsoft Bing Translator service');
+        $this->expectException('\\Potsky\\LaravelLocalizationHelpers\\Factory\\Exception', 'Please provide a client_id for Microsoft Bing Translator service');
         new Translator('Microsoft', [
             'env_name_client_id'     => 'this_env_does_not_exist',
             'env_name_client_secret' => 'this_env_does_not_exist',
@@ -58,7 +58,7 @@ class TranslatorTests extends TestCase
 
     public function testNoCredentialsClientSecret()
     {
-        $this->setExpectedException('\\Potsky\\LaravelLocalizationHelpers\\Factory\\Exception', 'Please provide a client_secret for Microsoft Bing Translator service');
+        $this->expectException('\\Potsky\\LaravelLocalizationHelpers\\Factory\\Exception', 'Please provide a client_secret for Microsoft Bing Translator service');
         new Translator('Microsoft', [
             'env_name_client_secret' => 'this_env_does_not_exist',
         ]);

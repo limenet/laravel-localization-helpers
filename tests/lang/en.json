@@ -1,0 +1,10 @@
+<?php
+/*************************************************************************
+ Generated via "php artisan localization:missing" at 2020/01/25 12:36:23 
+*************************************************************************/
+
+return array (
+  //============================== New strings to translate ==============================//
+  // Defined in file C:\\Users\\Linus\\Documents\\GitHub\\laravel-localization-helpers\\tests\\mock\\global\\trans.php
+  'OUPS lemma without family OUPS' => 'OUPS lemma without family OUPS POTSKY',
+);

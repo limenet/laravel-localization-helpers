@@ -49,8 +49,8 @@ class CommandMissingTests extends TestCase
         $result = Artisan::output();
 
         $this->assertEquals(0, $return);
-        $this->assertContains('File has been created', $result);
-        $this->assertContains('OUPS', $result);
+        $this->assertStringContainsString('File has been created', $result);
+        $this->assertStringContainsString('OUPS', $result);
 
         /** @noinspection PhpIncludeInspection */
         $lemmas = include self::LANG_DIR_PATH.'/fr/message.php';
@@ -68,7 +68,7 @@ class CommandMissingTests extends TestCase
         $return = Artisan::call('localization:missing', ['--no-interaction' => true]);
 
         $this->assertEquals(1, $return);
-        $this->assertContains('No lang folder found in your custom path:', Artisan::output());
+        $this->assertStringContainsString('No lang folder found in your custom path:', Artisan::output());
     }
 
     /**
@@ -99,7 +99,7 @@ class CommandMissingTests extends TestCase
         unlink(self::ORCHESTRA_LANG_DIR_PATH.'/en/message.php');
 
         $this->assertEquals(0, $return);
-        $this->assertContains('Drink a Piña colada and/or smoke Super Skunk, you have nothing to do!', Artisan::output());
+        $this->assertStringContainsString('Drink a Piña colada and/or smoke Super Skunk, you have nothing to do!', Artisan::output());
     }
 
     /**
@@ -114,7 +114,7 @@ class CommandMissingTests extends TestCase
         $return = Artisan::call('localization:missing', ['--no-interaction' => true]);
 
         $this->assertEquals(0, $return);
-        $this->assertContains('Backup files', Artisan::output());
+        $this->assertStringContainsString('Backup files', Artisan::output());
     }
 
     /**
@@ -191,7 +191,7 @@ class CommandMissingTests extends TestCase
         ]);
 
         $this->assertEquals(0, $return);
-        $this->assertContains('Lemmas will be searched in the following directories:', Artisan::output());
+        $this->assertStringContainsString('Lemmas will be searched in the following directories:', Artisan::output());
 
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         $return = Artisan::call('localization:missing', [
@@ -200,7 +200,7 @@ class CommandMissingTests extends TestCase
         ]);
 
         $this->assertEquals(0, $return);
-        $this->assertContains('Nothing to do for this file', Artisan::output());
+        $this->assertStringContainsString('Nothing to do for this file', Artisan::output());
     }
 
     public function testNothingToDo()
@@ -214,7 +214,7 @@ class CommandMissingTests extends TestCase
         ]);
 
         $this->assertEquals(0, $return);
-        $this->assertContains('No lemma has been found in code.', Artisan::output());
+        $this->assertStringContainsString('No lemma has been found in code.', Artisan::output());
     }
 
     public function testObsoleteLemma()
@@ -240,7 +240,7 @@ class CommandMissingTests extends TestCase
 
         $this->assertEquals(0, $return);
 
-        $this->assertContains('11 obsolete strings', Artisan::output());
+        $this->assertStringContainsString('11 obsolete strings', Artisan::output());
 
         $lemmas = require self::$langFile;
         $this->assertArrayNotHasKey('child', $lemmas);
@@ -265,7 +265,7 @@ class CommandMissingTests extends TestCase
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'translators.Microsoft.client_id', 'dumb');
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'translators.Microsoft.client_secret', 'dumber');
 
-        $this->setExpectedException('\\MicrosoftTranslator\\Exception');
+        $this->expectException('\\MicrosoftTranslator\\Exception');
 
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         Artisan::call('localization:missing', [

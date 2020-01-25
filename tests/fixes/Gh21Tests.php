@@ -70,7 +70,7 @@ return array (
             '--no-date'        => true,
         ]);
 
-        $this->assertContains('1 obsolete string', Artisan::output());
+        $this->assertStringContainsString('1 obsolete string', Artisan::output());
 
         $this->assertArrayHasKey('LLH:obsolete', require(self::$langFile));
     }
@@ -92,7 +92,7 @@ return array (
             '--no-date'        => true,
         ]);
 
-        $this->assertContains('1 obsolete string', Artisan::output());
+        $this->assertStringContainsString('1 obsolete string', Artisan::output());
 
         $lemmas = require self::$langFile;
 

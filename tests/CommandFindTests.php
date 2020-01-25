@@ -23,7 +23,7 @@ class CommandFindTests extends TestCase
         $return = Artisan::call('localization:find', ['lemma' => 'message.lemma', '--verbose' => true, '--short' => true]);
 
         $this->assertEquals(0, $return);
-        $this->assertContains('Lemma message.lemma has been found in', Artisan::output());
+        $this->assertStringContainsString('Lemma message.lemma has been found in', Artisan::output());
     }
 
     public function testSearchForRegexLemma()
@@ -32,13 +32,13 @@ class CommandFindTests extends TestCase
         $return = Artisan::call('localization:find', ['lemma' => 'message\\.lemma.*', '--verbose' => true, '--short' => true, '--regex' => true]);
 
         $this->assertEquals(1, $return);
-        $this->assertContains('The argument is not a valid regular expression:', Artisan::output());
+        $this->assertStringContainsString('The argument is not a valid regular expression:', Artisan::output());
 
         /** @noinspection PhpVoidFunctionResultUsedInspection */
         $return = Artisan::call('localization:find', ['lemma' => '@message\\.lemma.*@', '--verbose' => true, '--short' => true, '--regex' => true]);
 
         $this->assertEquals(0, $return);
-        $this->assertContains('has been found in', Artisan::output());
+        $this->assertStringContainsString('has been found in', Artisan::output());
 
         $messageBag = new MessageBag();
         $manager = new Localization($messageBag);
@@ -75,6 +75,6 @@ class CommandFindTests extends TestCase
         $return = $manager->findLemma('not a valid regex', $manager->getPath(self::MOCK_DIR_PATH_GLOBAL), $trans_methods, true, true);
         $messages = $messageBag->getMessages();
         $this->assertFalse($return);
-        $this->assertContains('The argument is not a valid regular expression:', $messages[0][1]);
+        $this->assertStringContainsString('The argument is not a valid regular expression:', $messages[0][1]);
     }
 }

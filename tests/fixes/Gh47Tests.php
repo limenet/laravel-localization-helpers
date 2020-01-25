@@ -42,8 +42,8 @@ class Gh47Tests extends TestCase
 
         $output = Artisan::output();
 
-        $this->assertNotContains('obsolete strings', $output);
-        $this->assertContains('foo seems to be used to access an array and is already defined in lang file as foo.bar', $output);
+        $this->assertStringNotContainsString('obsolete strings', $output);
+        $this->assertStringContainsString('foo seems to be used to access an array and is already defined in lang file as foo.bar', $output);
     }
 
     /**
@@ -66,6 +66,6 @@ class Gh47Tests extends TestCase
 
         $output = Artisan::output();
 
-        $this->assertContains('2 obsolete strings', $output);
+        $this->assertStringContainsString('2 obsolete strings', $output);
     }
 }

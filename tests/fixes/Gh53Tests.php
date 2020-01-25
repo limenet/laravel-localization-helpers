@@ -40,6 +40,6 @@ class Gh53Tests extends TestCase
             '--dry-run'        => true,
         ]);
 
-        $this->assertContains('Unable to understand string', Artisan::output());
+        $this->assertStringContainsString('Unable to understand string', Artisan::output());
     }
 }

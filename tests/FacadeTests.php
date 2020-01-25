@@ -9,7 +9,7 @@ class FacadeTests extends TestCase
         $loader = AliasLoader::getInstance();
         $loader->alias('LocalizationHelpers', 'Potsky\LaravelLocalizationHelpers\Facade\LocalizationHelpers');
 
-        $this->setExpectedException('Potsky\LaravelLocalizationHelpers\Factory\Exception');
+        $this->expectException('Potsky\LaravelLocalizationHelpers\Factory\Exception');
         LocalizationHelpers::getLangPath('/these_folder_does_not_exist_right?');
     }
 }

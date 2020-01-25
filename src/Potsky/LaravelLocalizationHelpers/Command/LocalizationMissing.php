@@ -12,6 +12,8 @@ use Potsky\LaravelLocalizationHelpers\Object\LangFileAbstract;
 use Potsky\LaravelLocalizationHelpers\Object\LangFileGenuine;
 use Potsky\LaravelLocalizationHelpers\Object\LangFileJson;
 use Symfony\Component\Console\Input\InputOption;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class LocalizationMissing extends LocalizationAbstract
 {
@@ -331,8 +333,8 @@ class LocalizationMissing extends LocalizationAbstract
 
                 /** @noinspection PhpIncludeInspection */
                 $a = $lang_file->load();
-                $old_lemmas_with_obsolete = (is_array($a)) ? array_dot($a) : [];
-                $new_lemmas = array_dot($array);
+                $old_lemmas_with_obsolete = (is_array($a)) ? Arr::dot($a) : [];
+                $new_lemmas = Arr::dot($array);
                 $final_lemmas = [];
                 $display_already_comment = false;
                 $something_to_do = false;
@@ -342,7 +344,7 @@ class LocalizationMissing extends LocalizationAbstract
                 $old_lemmas = [];
                 $obsolete_prefix_length = strlen($obsolete_prefix);
                 foreach ($old_lemmas_with_obsolete as $key => $value) {
-                    if (starts_with($key, $obsolete_prefix)) {
+                    if (Str::startsWith($key, $obsolete_prefix)) {
                         $key = substr($key, $obsolete_prefix_length);
                         if (!isset($old_lemmas[$key])) {
                             $old_lemmas[$key] = $value;
@@ -359,7 +361,7 @@ class LocalizationMissing extends LocalizationAbstract
 
                 foreach ($new_lemmas as $new_key => $new_value) {
                     foreach ($old_lemmas as $old_key => $old_value) {
-                        if (starts_with($old_key, $new_key.'.')) {
+                        if (Str::startsWith($old_key, $new_key.'.')) {
                             if ($this->option('verbose')) {
                                 $this->writeLine('            <info>'.$new_key.'</info> seems to be used to access an array and is already defined in lang file as '.$old_key);
                                 $this->writeLine('            <info>'.$new_key.'</info> not handled!');
@@ -447,7 +449,7 @@ class LocalizationMissing extends LocalizationAbstract
                     // Remove all dynamic fields
                     foreach ($obsolete_lemmas as $key => $value) {
                         foreach ($this->never_obsolete_keys as $remove) {
-                            if ((strpos($key, '.'.$remove.'.') !== false) || starts_with($key, $remove.'.')) {
+                            if ((strpos($key, '.'.$remove.'.') !== false) || Str::startsWith($key, $remove.'.')) {
                                 if ($this->option('verbose')) {
                                     $this->writeLine('        <comment>'.$key.'</comment> is protected as a dynamic lemma');
                                 }
@@ -492,7 +494,7 @@ class LocalizationMissing extends LocalizationAbstract
 
                 // Flat style
                 if ($this->option('output-flat')) {
-                    $final_lemmas = array_dot($final_lemmas);
+                    $final_lemmas = Arr::dot($final_lemmas);
                 }
 
                 if (($something_to_do === true) || ($this->option('force'))) {

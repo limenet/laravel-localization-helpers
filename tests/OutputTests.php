@@ -35,18 +35,18 @@ class OutputTests extends TestCase
         $manager = new Localization($messageBag);
 
         /** @noinspection PhpIncludeInspection */
-        $this->assertContains('array (', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
-        $this->assertNotContains('[', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
+        $this->assertStringContainsString('array (', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
+        $this->assertStringNotContainsString('[', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
 
-        $this->assertContains('Fixed all files in', $manager->fixCodeStyle(
+        $this->assertStringContainsString('Fixed all files in', $manager->fixCodeStyle(
             self::LANG_DIR_PATH.'/fr/message.php',
             ['align_double_arrow', 'short_array_syntax'],
             'psr2'
         ));
 
         /** @noinspection PhpIncludeInspection */
-        $this->assertContains('[', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
-        $this->assertNotContains('array (', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
+        $this->assertStringContainsString('[', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
+        $this->assertStringNotContainsString('array (', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
     }
 
     public function testPathDoesNotExist()
@@ -54,7 +54,7 @@ class OutputTests extends TestCase
         $messageBag = new MessageBag();
         $manager = new Localization($messageBag);
 
-        $this->setExpectedException('\\Potsky\\LaravelLocalizationHelpers\\Factory\\Exception');
+        $this->expectException('\\Potsky\\LaravelLocalizationHelpers\\Factory\\Exception');
 
         $manager->fixCodeStyle(
             self::LANG_DIR_PATH.'/file_does_not_exist',
