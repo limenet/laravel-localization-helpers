@@ -497,13 +497,13 @@ class LocalizationMissing extends LocalizationAbstract
                     $final_lemmas = Arr::dot($final_lemmas);
                 }
                 if (($something_to_do === true) || ($this->option('force'))) {
-                    if($lang_file->getTypeJson()){
+                    if ($lang_file->getTypeJson()) {
                         unset($final_lemmas['POTSKY___NEW___POTSKY']);
                         $file_content = json_encode($final_lemmas);
-                    }else{
-                    $content = var_export($final_lemmas, true);
-                    $content = preg_replace("@'POTSKY___COMMENT___POTSKY[0-9]*' => '(.*)',@", '// $1', $content);
-                    $content = str_replace(
+                    } else {
+                        $content = var_export($final_lemmas, true);
+                        $content = preg_replace("@'POTSKY___COMMENT___POTSKY[0-9]*' => '(.*)',@", '// $1', $content);
+                        $content = str_replace(
                         [
                             "'POTSKY___NEW___POTSKY' => 'POTSKY___NEW___POTSKY',",
                             "'POTSKY___OLD___POTSKY' => 'POTSKY___OLD___POTSKY',",
@@ -519,15 +519,15 @@ class LocalizationMissing extends LocalizationAbstract
                         $content
                     );
 
-                    $file_content = "<?php\n";
+                        $file_content = "<?php\n";
 
-                    if (!$this->option('no-date')) {
-                        $a = ' Generated via "php artisan '.$this->argument('command').'" at '.date('Y/m/d H:i:s').' ';
-                        $file_content .= '/'.str_repeat('*', strlen($a))."\n".$a."\n".str_repeat('*', strlen($a))."/\n";
+                        if (!$this->option('no-date')) {
+                            $a = ' Generated via "php artisan '.$this->argument('command').'" at '.date('Y/m/d H:i:s').' ';
+                            $file_content .= '/'.str_repeat('*', strlen($a))."\n".$a."\n".str_repeat('*', strlen($a))."/\n";
+                        }
+
+                        $file_content .= "\nreturn ".$content.';';
                     }
-
-                    $file_content .= "\nreturn ".$content.';';
-                }
                     $job[$lang_file->getFilePath()] = $file_content;
                 } else {
                     if ($this->option('verbose')) {

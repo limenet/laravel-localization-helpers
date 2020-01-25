@@ -19,7 +19,7 @@ class TestCase extends Orchestra\Testbench\TestCase
 
     public function tearDown(): void
     {
-		  Mockery::close();
+        Mockery::close();
     }
 
     /**

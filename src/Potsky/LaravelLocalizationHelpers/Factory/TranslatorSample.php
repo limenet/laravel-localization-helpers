@@ -22,6 +22,6 @@ class TranslatorSample implements TranslatorInterface
      */
     public function translate($word, $toLang, $fromLang = null)
     {
-        return sprintf('%s(%s): %s', $toLang, $fromLang,$word);
+        return sprintf('%s(%s): %s', $toLang, $fromLang, $word);
     }
 }

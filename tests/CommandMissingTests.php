@@ -5,7 +5,7 @@ use Potsky\LaravelLocalizationHelpers\Factory\Tools;
 
 class CommandMissingTests extends TestCase
 {
-	private static $langFile;
+    private static $langFile;
 
     /**
      * Setup the test environment.
@@ -85,8 +85,8 @@ class CommandMissingTests extends TestCase
     {
         Config::set(Localization::PREFIX_LARAVEL_CONFIG.'lang_folder_path', null);
 
-		/** @noinspection PhpVoidFunctionResultUsedInspection */
-		$return = Artisan::call('localization:missing', ['--no-interaction' => true]);
+        /** @noinspection PhpVoidFunctionResultUsedInspection */
+        $return = Artisan::call('localization:missing', ['--no-interaction' => true]);
 
         $this->assertEquals(0, $return);
         $this->assertStringContainsString('Drink a Piña colada and/or smoke Super Skunk, you have nothing to do!', Artisan::output());

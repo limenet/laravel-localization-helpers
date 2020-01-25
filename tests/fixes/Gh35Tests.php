@@ -39,9 +39,9 @@ class Gh35Tests extends TestCase
             '--no-comment'     => true,
         ]);
 
-		$lemmas = require self::$langFile;
+        $lemmas = require self::$langFile;
 
-		// FIXME: weird behavior
+        // FIXME: weird behavior
         $this->assertArrayHasKey('multiline1', $lemmas['LLH:obsolete']);
         $this->assertArrayHasKey('multiline2', $lemmas['LLH:obsolete']);
         $this->assertArrayHasKey('multiline3', $lemmas['LLH:obsolete']);

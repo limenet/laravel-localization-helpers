@@ -92,7 +92,7 @@ class Gh56Tests extends TestCase
             '--verbose'        => true,
             '--no-date'        => true,
             '--no-comment'     => true,
-            '--verbose'     => true,
+            '--verbose'        => true,
         ]);
 
         $this->assertFileNotExists(self::$langFileIncorrectGenuine);
