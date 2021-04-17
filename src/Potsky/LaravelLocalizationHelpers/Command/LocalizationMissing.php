@@ -504,20 +504,20 @@ class LocalizationMissing extends LocalizationAbstract
                         $content = var_export($final_lemmas, true);
                         $content = preg_replace("@'POTSKY___COMMENT___POTSKY[0-9]*' => '(.*)',@", '// $1', $content);
                         $content = str_replace(
-                        [
-                            "'POTSKY___NEW___POTSKY' => 'POTSKY___NEW___POTSKY',",
-                            "'POTSKY___OLD___POTSKY' => 'POTSKY___OLD___POTSKY',",
-                            "'POTSKY___PROTECTED___POTSKY' => 'POTSKY___PROTECTED___POTSKY',",
-                            "'POTSKY___OBSOLETE___POTSKY' => 'POTSKY___OBSOLETE___POTSKY',",
-                        ],
-                        [
-                            '//============================== New strings to translate ==============================//',
-                            ($display_already_comment === true) ? '//==================================== Translations ====================================//' : '',
-                            '//============================== Dynamic protected strings =============================//',
-                            '//================================== Obsolete strings ==================================//',
-                        ],
-                        $content
-                    );
+                            [
+                                "'POTSKY___NEW___POTSKY' => 'POTSKY___NEW___POTSKY',",
+                                "'POTSKY___OLD___POTSKY' => 'POTSKY___OLD___POTSKY',",
+                                "'POTSKY___PROTECTED___POTSKY' => 'POTSKY___PROTECTED___POTSKY',",
+                                "'POTSKY___OBSOLETE___POTSKY' => 'POTSKY___OBSOLETE___POTSKY',",
+                            ],
+                            [
+                                '//============================== New strings to translate ==============================//',
+                                ($display_already_comment === true) ? '//==================================== Translations ====================================//' : '',
+                                '//============================== Dynamic protected strings =============================//',
+                                '//================================== Obsolete strings ==================================//',
+                            ],
+                            $content
+                        );
 
                         $file_content = "<?php\n";
 

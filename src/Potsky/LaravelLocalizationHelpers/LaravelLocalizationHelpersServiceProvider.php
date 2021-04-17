@@ -61,7 +61,8 @@ class LaravelLocalizationHelpersServiceProvider extends ServiceProvider
         });
 
         $this->mergeConfigFrom(
-            __DIR__.'/../../config/config.php', 'laravel-localization-helpers'
+            __DIR__.'/../../config/config.php',
+            'laravel-localization-helpers'
         );
     }
 }
