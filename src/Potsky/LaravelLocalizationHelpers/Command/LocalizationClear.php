@@ -2,7 +2,6 @@
 
 namespace Potsky\LaravelLocalizationHelpers\Command;
 
-use Config;
 use Illuminate\Config\Repository;
 use Potsky\LaravelLocalizationHelpers\Factory\Localization;
 use Symfony\Component\Console\Input\InputOption;

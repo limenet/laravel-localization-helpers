@@ -2,7 +2,6 @@
 
 namespace Potsky\LaravelLocalizationHelpers\Factory;
 
-use Config;
 use Illuminate\Support\Arr;
 use PhpCsFixer\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;

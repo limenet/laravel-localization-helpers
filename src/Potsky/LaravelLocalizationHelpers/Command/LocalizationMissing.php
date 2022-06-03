@@ -2,7 +2,6 @@
 
 namespace Potsky\LaravelLocalizationHelpers\Command;
 
-use Config;
 use Illuminate\Config\Repository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
