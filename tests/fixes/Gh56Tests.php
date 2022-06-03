@@ -60,8 +60,8 @@ class Gh56Tests extends TestCase
     //		) );
 //
     //		$this->assertFileExists( self::$langFileEn );
-    //		$this->assertFileNotExists( self::$langFileJsonEn );
-    //		$this->assertFileNotExists( self::$langFileJsonFr );
+    //		$this->assertFileDoesNotExist( self::$langFileJsonEn );
+    //		$this->assertFileDoesNotExist( self::$langFileJsonFr );
 //
     //		$lemmas = require( self::$langFileEn );
 //
@@ -95,7 +95,7 @@ class Gh56Tests extends TestCase
             '--verbose'        => true,
         ]);
 
-        $this->assertFileNotExists(self::$langFileIncorrectGenuine);
+        $this->assertFileDoesNotExist(self::$langFileIncorrectGenuine);
         $this->assertFileExists(self::$langFileEn);
         $this->assertFileExists(self::$langFileJsonEn);
         $this->assertFileExists(self::$langFileJsonFr);

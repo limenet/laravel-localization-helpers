@@ -50,9 +50,9 @@ class Gh44Tests extends TestCase
             '--no-comment'     => true,
         ]);
 
-        $this->assertFileNotExists(self::$langValidationEnFile);
-        $this->assertFileNotExists(self::$langValidationFrFile);
-        $this->assertFileNotExists(self::$langPotskyFrFile);
+        $this->assertFileDoesNotExist(self::$langValidationEnFile);
+        $this->assertFileDoesNotExist(self::$langValidationFrFile);
+        $this->assertFileDoesNotExist(self::$langPotskyFrFile);
         $this->assertFileExists(self::$langPotskyEnFile);
         $this->assertFileExists(self::$langMessageEnFile);
         $this->assertFileExists(self::$langMessageFrFile);

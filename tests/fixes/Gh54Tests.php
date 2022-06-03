@@ -40,6 +40,6 @@ class Gh54Tests extends TestCase
             '--dry-run'        => true,
         ]);
 
-        $this->assertFileNotExists(self::$langFile);
+        $this->assertFileDoesNotExist(self::$langFile);
     }
 }

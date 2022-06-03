@@ -27,9 +27,9 @@ class Tools
     /**
      * @return bool
      */
-    public static function isLaravel6()
+    public static function isLaravel9()
     {
-        return  self::getLaravelMajorVersion() === 6;
+        return  self::getLaravelMajorVersion() === 9;
     }
 
     /**

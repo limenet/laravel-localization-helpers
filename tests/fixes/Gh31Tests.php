@@ -49,7 +49,7 @@ class Gh31Tests extends TestCase
         ]);
 
         $this->assertFileExists(self::$langFile);
-        $this->assertFileNotExists(self::$langFileVendor);
-        $this->assertFileNotExists(self::$langFileVendor42);
+        $this->assertFileDoesNotExist(self::$langFileVendor);
+        $this->assertFileDoesNotExist(self::$langFileVendor42);
     }
 }

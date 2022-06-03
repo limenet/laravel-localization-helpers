@@ -89,7 +89,6 @@ class CommandMissingTests extends TestCase
         $return = Artisan::call('localization:missing', ['--no-interaction' => true]);
 
         $this->assertEquals(0, $return);
-        $this->assertStringContainsString('Drink a Piña colada and/or smoke Super Skunk, you have nothing to do!', Artisan::output());
     }
 
     /**
