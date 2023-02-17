@@ -38,7 +38,7 @@ class OutputTests extends TestCase
         $this->assertStringContainsString('array (', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
         $this->assertStringNotContainsString('[', file_get_contents(self::LANG_DIR_PATH.'/fr/message.php'));
 
-        $this->assertStringContainsString('Fixed all files in', $manager->fixCodeStyle(
+        $this->assertStringContainsString('Fixed 1 of 1 files in', $manager->fixCodeStyle(
             self::LANG_DIR_PATH.'/fr/message.php',
             ['array_syntax' => ['syntax' => 'short']],
             '@PSR2'
