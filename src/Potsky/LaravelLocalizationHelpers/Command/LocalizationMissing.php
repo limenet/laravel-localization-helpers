@@ -229,7 +229,7 @@ class LocalizationMissing extends LocalizationAbstract
                         $this->writeError('- '.$path);
                     }
                     break;
-                //@codeCoverageIgnoreEnd
+                    //@codeCoverageIgnoreEnd
 
                 case Localization::NO_LANG_FOLDER_FOUND_IN_YOUR_CUSTOM_PATH:
                     $this->writeError('No lang folder found in your custom path: "'.$e->getParameter().'"');
@@ -495,7 +495,7 @@ class LocalizationMissing extends LocalizationAbstract
                 if ($this->option('output-flat')) {
                     $final_lemmas = Arr::dot($final_lemmas);
                 }
-                if (($something_to_do === true) || ($this->option('force'))) {
+                if (($something_to_do === true) || $this->option('force')) {
                     if ($lang_file->getTypeJson()) {
                         unset($final_lemmas['POTSKY___NEW___POTSKY']);
                         $file_content = json_encode($final_lemmas);
@@ -619,9 +619,9 @@ class LocalizationMissing extends LocalizationAbstract
                 if ($this->option('editor')) {
                     exec($this->editor.$open_files);
                 }
-                // @codeCoverageIgnoreEnd
+            // @codeCoverageIgnoreEnd
 
-                // @codeCoverageIgnoreStart
+            // @codeCoverageIgnoreStart
             } else {
                 $this->writeLine('');
                 $this->writeComment('Process aborted. No file has been changed.');

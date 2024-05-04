@@ -60,7 +60,7 @@ class TranslatorMicrosoft implements TranslatorInterface
     public function translate($word, $toLang, $fromLang = null)
     {
         try {
-            if ((is_null($fromLang)) && (!is_null($this->default_language))) {
+            if (is_null($fromLang) && (!is_null($this->default_language))) {
                 $fromLang = $this->default_language;
             }
 

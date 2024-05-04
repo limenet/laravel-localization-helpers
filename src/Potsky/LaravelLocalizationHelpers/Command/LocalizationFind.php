@@ -78,7 +78,7 @@ class LocalizationFind extends LocalizationAbstract
         ////////////////////////////////
         $files = $this->manager->findLemma($lemma, $folders, $this->trans_methods, $this->option('regex'), $this->option('short'));
 
-        if ((is_array($files)) && (count($files) > 0)) {
+        if (is_array($files) && (count($files) > 0)) {
             $this->writeLine('Lemma <info>'.$lemma.'</info> has been found in:');
             foreach ($files as $file) {
                 $this->writeLine('    <info>'.$file.'</info>');

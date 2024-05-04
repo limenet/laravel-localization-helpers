@@ -344,7 +344,7 @@ class Localization
                         $this->messageBag->writeError('- '.$path);
                     }
                     break;
-                //@codeCoverageIgnoreEnd
+                    //@codeCoverageIgnoreEnd
 
                 case self::NO_LANG_FOLDER_FOUND_IN_YOUR_CUSTOM_PATH:
                     $this->messageBag->writeError('No lang folder found in your custom path: "'.$e->getParameter().'"');
