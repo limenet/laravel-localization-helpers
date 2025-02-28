@@ -6,8 +6,8 @@ class ToolsTests extends TestCase
 {
     public function testLaravelVersion()
     {
-        $this->assertEquals(11, Tools::getLaravelMajorVersion());
-        $this->assertTrue(Tools::isLaravel11());
+        $this->assertEquals(12, Tools::getLaravelMajorVersion());
+        $this->assertTrue(Tools::isLaravel12());
     }
 
     public function testValidDirectory()
