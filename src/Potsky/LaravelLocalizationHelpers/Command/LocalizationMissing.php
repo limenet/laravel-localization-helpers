@@ -665,7 +665,7 @@ class LocalizationMissing extends LocalizationAbstract
             ['no-date', 'd', InputOption::VALUE_NONE, 'Do not add the date of execution in the lang files'],
             ['no-obsolete', 'o', InputOption::VALUE_NONE, 'Do not write obsolete lemma (obsolete lemma will be removed)'],
             ['output-flat', 'w', InputOption::VALUE_NONE, 'Output arrays are flat (do not use sub-arrays and keep dots in lemma)'],
-            ['silent', 's', InputOption::VALUE_NONE, 'Use this option to only return the exit code (use $? in shell to know whether there are missing lemma or nt)'],
+            // ['silent', 's', InputOption::VALUE_NONE, 'Use this option to only return the exit code (use $? in shell to know whether there are missing lemma or nt)'],
             ['php-file-extension', 'x', InputOption::VALUE_OPTIONAL, 'PHP file extension', 'php'],
             ['disable-obsolete-check', 'z', InputOption::VALUE_NONE, 'Use this option to disable check for obsolete lemmas (obsolete lemma will be kept)'],
         ];
