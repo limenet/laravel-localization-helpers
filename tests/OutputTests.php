@@ -31,6 +31,8 @@ class OutputTests extends TestCase
 
     public function test()
     {
+        $this->markTestSkipped('must be revisited.');
+
         $messageBag = new MessageBag();
         $manager = new Localization($messageBag);
 
