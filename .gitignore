@@ -9,3 +9,4 @@ cs_fixer_tmp_*
 .php_cs.cache
 .php-cs-fixer.cache
 .phpunit.cache/
+composer.lock
