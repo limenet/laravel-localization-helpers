@@ -8,12 +8,12 @@
   ],
   "license": "GPL-3.0-or-later",
   "require": {
-    "illuminate/support": "^11.0",
+    "illuminate/support": "^11.0 || ^12.0",
     "friendsofphp/php-cs-fixer": "^3.0"
   },
   "require-dev": {
-    "orchestra/testbench": "^9.11.0",
-    "phpunit/phpunit": "^10.5.45",
+    "orchestra/testbench": "^10.0.0",
+    "phpunit/phpunit": "^11.5.10",
     "mockery/mockery": "^1.6.12",
     "php-coveralls/php-coveralls": "^2.7"
   },
