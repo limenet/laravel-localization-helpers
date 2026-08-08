@@ -5,31 +5,31 @@ namespace Potsky\LaravelLocalizationHelpers\Factory;
 class MessageBag implements MessageBagInterface
 {
     const LINE = 'line';
+
     const INFO = 'info';
+
     const COMMENT = 'comment';
+
     const QUESTION = 'question';
+
     const ERROR = 'error';
 
-    private $bag = [];
+    private array $bag = [];
 
     /**
      * Tell whether or not this bag has pending messages.
-     *
-     * @return bool
      */
-    public function hasMessages()
+    public function hasMessages(): bool
     {
-        return  count($this->bag) > 1;
+        return count($this->bag) > 1;
     }
 
     /**
      * Get all messages as an array.
      *
      * Use getMessageType and getMessage to parse a message
-     *
-     * @return array
      */
-    public function getMessages()
+    public function getMessages(): array
     {
         return $this->bag;
     }
@@ -37,7 +37,7 @@ class MessageBag implements MessageBagInterface
     /**
      * Clean the bag by removing all messages.
      */
-    public function deleteMessages()
+    public function deleteMessages(): void
     {
         $this->bag = [];
     }
@@ -45,11 +45,9 @@ class MessageBag implements MessageBagInterface
     /**
      * Get the message type of a message get by getMessages.
      *
-     * @param array $message
-     *
      * @return mixed
      */
-    public function getMessageType($message)
+    public function getMessageType(array $message)
     {
         return $message[0];
     }
@@ -57,11 +55,9 @@ class MessageBag implements MessageBagInterface
     /**
      * Get the message text.
      *
-     * @param array $message
-     *
      * @return mixed
      */
-    public function getMessage($message)
+    public function getMessage(array $message)
     {
         return $message[1];
     }
@@ -69,15 +65,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add a simple message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeLine($s)
+    public function writeLine($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!empty($message)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::LINE, $message];
         }
     }
@@ -85,15 +79,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add an info message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeInfo($s)
+    public function writeInfo($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!empty($message)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::INFO, $message];
         }
     }
@@ -101,15 +93,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add a comment message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeComment($s)
+    public function writeComment($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!empty($message)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::COMMENT, $message];
         }
     }
@@ -117,15 +107,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add a question message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeQuestion($s)
+    public function writeQuestion($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!empty($message)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::QUESTION, $message];
         }
     }
@@ -133,15 +121,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add an error message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeError($s)
+    public function writeError($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!empty($message)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::ERROR, $message];
         }
     }
@@ -149,11 +135,9 @@ class MessageBag implements MessageBagInterface
     /**
      * Trim and remove all XML tags.
      *
-     * @param string $m the message to clean
-     *
-     * @return string
+     * @param  string  $m  the message to clean
      */
-    protected function cleanMessage($m)
+    protected function cleanMessage($m): ?string
     {
         return preg_replace('@<[A-Za-z0-9/]*>@', '', trim($m));
     }

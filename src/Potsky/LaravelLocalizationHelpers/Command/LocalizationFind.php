@@ -39,8 +39,6 @@ class LocalizationFind extends LocalizationAbstract
 
     /**
      * Create a new command instance.
-     *
-     * @param \Illuminate\Config\Repository $configRepository
      */
     public function __construct(Repository $configRepository)
     {
@@ -52,17 +50,15 @@ class LocalizationFind extends LocalizationAbstract
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $lemma = $this->argument('lemma');
         $folders = $this->manager->getPath($this->folders);
 
-        //////////////////////////////////////////////////
+        // ////////////////////////////////////////////////
         // Display where translatations are searched in //
-        //////////////////////////////////////////////////
+        // ////////////////////////////////////////////////
         if ($this->option('verbose')) {
             $this->writeLine('Lemmas will be searched in the following directories:');
 
@@ -73,9 +69,9 @@ class LocalizationFind extends LocalizationAbstract
             $this->writeLine('');
         }
 
-        ////////////////////////////////
+        // //////////////////////////////
         // Parse all lemmas from code //
-        ////////////////////////////////
+        // //////////////////////////////
         $files = $this->manager->findLemma($lemma, $folders, $this->trans_methods, $this->option('regex'), $this->option('short'));
 
         if (is_array($files) && (count($files) > 0)) {
@@ -85,9 +81,9 @@ class LocalizationFind extends LocalizationAbstract
             }
 
             return self::SUCCESS;
-        } else {
-            return self::ERROR;
         }
+
+        return self::ERROR;
     }
 
     /**
@@ -95,6 +91,7 @@ class LocalizationFind extends LocalizationAbstract
      *
      * @return array
      */
+    #[\Override]
     protected function getArguments()
     {
         return [
@@ -107,6 +104,7 @@ class LocalizationFind extends LocalizationAbstract
      *
      * @return array
      */
+    #[\Override]
     protected function getOptions()
     {
         return [

@@ -4,9 +4,7 @@
 coverage
 /tmp*
 _ide_helper.php
-cs_fixer_tmp_*
 .phpunit.result.cache
-.php_cs.cache
-.php-cs-fixer.cache
+.pint.cache
 .phpunit.cache/
 composer.lock

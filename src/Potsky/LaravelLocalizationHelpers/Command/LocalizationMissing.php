@@ -9,7 +9,6 @@ use Potsky\LaravelLocalizationHelpers\Factory\Exception;
 use Potsky\LaravelLocalizationHelpers\Factory\LangFile;
 use Potsky\LaravelLocalizationHelpers\Factory\Localization;
 use Potsky\LaravelLocalizationHelpers\Factory\Tools;
-use Potsky\LaravelLocalizationHelpers\Object\LangFileAbstract;
 use Potsky\LaravelLocalizationHelpers\Object\LangFileGenuine;
 use Potsky\LaravelLocalizationHelpers\Object\LangFileJson;
 use Symfony\Component\Console\Input\InputOption;
@@ -73,20 +72,6 @@ class LocalizationMissing extends LocalizationAbstract
     protected $lang_folder_path = [];
 
     /**
-     * The code style list of fixers to apply.
-     *
-     * @var array
-     */
-    protected $code_style_fixers = [];
-
-    /**
-     * The code style level to apply.
-     *
-     * @var string
-     */
-    protected $code_style_level = null;
-
-    /**
      * The obsolete lemma array key in which to store obsolete lemma.
      *
      * @var string
@@ -102,7 +87,7 @@ class LocalizationMissing extends LocalizationAbstract
      *
      * @since 2.x.5
      */
-    protected $dot_notation_split_regex = null;
+    protected $dot_notation_split_regex;
 
     /**
      * The JSON languages to handle.
@@ -111,12 +96,10 @@ class LocalizationMissing extends LocalizationAbstract
      *
      * @since 2.x.6
      */
-    protected $json_languages = null;
+    protected $json_languages;
 
     /**
      * Create a new command instance.
-     *
-     * @param \Illuminate\Config\Repository $configRepository
      */
     public function __construct(Repository $configRepository)
     {
@@ -128,12 +111,10 @@ class LocalizationMissing extends LocalizationAbstract
         $this->lang_folder_path = config(Localization::PREFIX_LARAVEL_CONFIG.'lang_folder_path');
         $this->never_obsolete_keys = config(Localization::PREFIX_LARAVEL_CONFIG.'never_obsolete_keys');
         $this->editor = config(Localization::PREFIX_LARAVEL_CONFIG.'editor_command_line');
-        $this->code_style_fixers = config(Localization::PREFIX_LARAVEL_CONFIG.'code_style.fixers');
-        $this->code_style_level = config(Localization::PREFIX_LARAVEL_CONFIG.'code_style.level');
         $this->dot_notation_split_regex = config(Localization::PREFIX_LARAVEL_CONFIG.'dot_notation_split_regex');
         $this->json_languages = config(Localization::PREFIX_LARAVEL_CONFIG.'json_languages');
 
-        if (!is_string($this->dot_notation_split_regex)) {
+        if (! is_string($this->dot_notation_split_regex)) {
             // fallback to dot if provided regex is not a string
             $this->dot_notation_split_regex = '/\\./';
         }
@@ -146,19 +127,17 @@ class LocalizationMissing extends LocalizationAbstract
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $folders = $this->manager->getPath($this->folders);
-        $this->display = !$this->option('silent');
+        $this->display = ! $this->option('silent');
         $extension = $this->option('php-file-extension');
         $obsolete_prefix = (empty($this->obsolete_array_key)) ? '' : $this->obsolete_array_key.'.';
 
-        //////////////////////////////////////////////////
+        // ////////////////////////////////////////////////
         // Display where translations are searched in //
-        //////////////////////////////////////////////////
+        // ////////////////////////////////////////////////
         if ($this->option('verbose')) {
             $this->writeLine('Lemmas will be searched in the following directories:');
 
@@ -169,9 +148,9 @@ class LocalizationMissing extends LocalizationAbstract
             $this->writeLine('');
         }
 
-        ////////////////////////////////
+        // //////////////////////////////
         // Parse all lemmas from code //
-        ////////////////////////////////
+        // //////////////////////////////
         $lemmas = $this->manager->extractTranslationsFromFolders($folders, $this->trans_methods, $extension);
 
         if (count($lemmas) === 0) {
@@ -195,15 +174,15 @@ class LocalizationMissing extends LocalizationAbstract
 
         if ($this->option('verbose')) {
             foreach ($lemmas as $key => $value) {
-                if (strpos($key, '.') !== false) {
+                if (str_contains($key, '.')) {
                     $this->writeLine('    <info>'.$key.'</info> in file <comment>'.$this->manager->getShortPath($value).'</comment>');
                 }
             }
         }
 
-        /////////////////////////////////////////////
+        // ///////////////////////////////////////////
         // Convert dot lemmas to structured lemmas //
-        /////////////////////////////////////////////
+        // ///////////////////////////////////////////
         if ($this->option('output-flat')) {
             $lemmas_structured = $this->manager->convertLemmaToFlatArray($lemmas);
         } else {
@@ -212,27 +191,28 @@ class LocalizationMissing extends LocalizationAbstract
 
         $this->writeLine('');
 
-        /////////////////////////////////////
+        // ///////////////////////////////////
         // Generate lang files :           //
         // - add missing lemmas on top     //
         // - keep already defined lemmas   //
         // - add obsolete lemmas on bottom //
-        /////////////////////////////////////
+        // ///////////////////////////////////
         try {
             $dir_lang = $this->manager->getLangPath($this->lang_folder_path);
-        } catch (Exception $e) {
-            switch ($e->getCode()) {
-                //@codeCoverageIgnoreStart
+        } catch (Exception $exception) {
+            switch ($exception->getCode()) {
+                // @codeCoverageIgnoreStart
                 case Localization::NO_LANG_FOLDER_FOUND_IN_THESE_PATHS:
                     $this->writeError('No lang folder found in these paths:');
-                    foreach ($e->getParameter() as $path) {
+                    foreach ($exception->getParameter() as $path) {
                         $this->writeError('- '.$path);
                     }
+
                     break;
-                    //@codeCoverageIgnoreEnd
+                    // @codeCoverageIgnoreEnd
 
                 case Localization::NO_LANG_FOLDER_FOUND_IN_YOUR_CUSTOM_PATH:
-                    $this->writeError('No lang folder found in your custom path: "'.$e->getParameter().'"');
+                    $this->writeError('No lang folder found in your custom path: "'.$exception->getParameter().'"');
                     break;
             }
 
@@ -248,8 +228,6 @@ class LocalizationMissing extends LocalizationAbstract
 
         /**
          * Parse all lang file types.
-         *
-         * @var LangFileAbstract
          */
         foreach (LangFile::getLangFiles($dir_lang, $this->json_languages) as $langFileType) {
             if ($langFileType->getTypeVendor()) {
@@ -272,6 +250,7 @@ class LocalizationMissing extends LocalizationAbstract
                             $this->writeLine('');
                             $this->writeInfo("    ! Skip lang file '$family' !");
                         }
+
                         continue;
                     }
                 }
@@ -282,8 +261,8 @@ class LocalizationMissing extends LocalizationAbstract
 
                 $this->writeLine('    '.$lang_file->getShortFilePath());
 
-                if (!$this->option('dry-run')) {
-                    if (!$lang_file->ensureFolder()) {
+                if (! $this->option('dry-run')) {
+                    if (! $lang_file->ensureFolder()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to create directory '.$lang_file->getFileFolderPath());
 
@@ -291,7 +270,7 @@ class LocalizationMissing extends LocalizationAbstract
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (!$lang_file->isFolderWritable()) {
+                    if (! $lang_file->isFolderWritable()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to write file in directory '.$lang_file->getFileFolderPath());
 
@@ -299,13 +278,13 @@ class LocalizationMissing extends LocalizationAbstract
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (!$lang_file->fileExists()) {
+                    if (! $lang_file->fileExists()) {
                         // @codeCoverageIgnoreStart
                         $this->writeInfo('    > File has been created');
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (!$lang_file->touch()) {
+                    if (! $lang_file->touch()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to touch file '.$lang_file->getFilePath());
 
@@ -313,7 +292,7 @@ class LocalizationMissing extends LocalizationAbstract
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (!$lang_file->isReadable()) {
+                    if (! $lang_file->isReadable()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to read file '.$lang_file->getFilePath());
 
@@ -321,7 +300,7 @@ class LocalizationMissing extends LocalizationAbstract
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (!$lang_file->isWritable()) {
+                    if (! $lang_file->isWritable()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to write in file '.$lang_file->getFilePath());
 
@@ -345,7 +324,7 @@ class LocalizationMissing extends LocalizationAbstract
                 foreach ($old_lemmas_with_obsolete as $key => $value) {
                     if (Str::startsWith($key, $obsolete_prefix)) {
                         $key = substr($key, $obsolete_prefix_length);
-                        if (!isset($old_lemmas[$key])) {
+                        if (! isset($old_lemmas[$key])) {
                             $old_lemmas[$key] = $value;
                         }
                     } else {
@@ -386,9 +365,9 @@ class LocalizationMissing extends LocalizationAbstract
                 ksort($welcome_lemmas);
                 ksort($already_lemmas);
 
-                //////////////////////////
+                // ////////////////////////
                 // Deal with new lemmas //
-                //////////////////////////
+                // ////////////////////////
                 if (count($welcome_lemmas) > 0) {
                     $display_already_comment = true;
                     $something_to_do = true;
@@ -401,9 +380,10 @@ class LocalizationMissing extends LocalizationAbstract
                         if ($this->option('verbose')) {
                             $this->writeLine('            <info>'.$key.'</info> in '.$this->manager->getShortPath($value));
                         }
-                        if (!$this->option('no-comment')) {
+
+                        if (! $this->option('no-comment')) {
                             $final_lemmas['POTSKY___COMMENT___POTSKY'.$i] = "Defined in file $value";
-                            $i = $i + 1;
+                            $i += 1;
                         }
 
                         $key_last_token = preg_split($this->dot_notation_split_regex, $key);
@@ -424,9 +404,9 @@ class LocalizationMissing extends LocalizationAbstract
                     }
                 }
 
-                ///////////////////////////////
+                // /////////////////////////////
                 // Deal with existing lemmas //
-                ///////////////////////////////
+                // /////////////////////////////
                 if (count($already_lemmas) > 0) {
                     if ($this->option('verbose')) {
                         $this->writeLine('        '.($c = count($already_lemmas)).' already translated string'.Tools::getPlural($c));
@@ -439,16 +419,16 @@ class LocalizationMissing extends LocalizationAbstract
                     }
                 }
 
-                ///////////////////////////////
+                // /////////////////////////////
                 // Deal with obsolete lemmas //
-                ///////////////////////////////
+                // /////////////////////////////
                 if (count($obsolete_lemmas) > 0) {
                     $protected_already_included = false;
 
                     // Remove all dynamic fields
                     foreach ($obsolete_lemmas as $key => $value) {
                         foreach ($this->never_obsolete_keys as $remove) {
-                            if ((strpos($key, '.'.$remove.'.') !== false) || Str::startsWith($key, $remove.'.')) {
+                            if ((str_contains($key, '.'.$remove.'.')) || Str::startsWith($key, $remove.'.')) {
                                 if ($this->option('verbose')) {
                                     $this->writeLine('        <comment>'.$key.'</comment> is protected as a dynamic lemma');
                                 }
@@ -467,9 +447,9 @@ class LocalizationMissing extends LocalizationAbstract
                     }
                 }
 
-                /////////////////////////////////////
+                // ///////////////////////////////////
                 // Fill the final lemmas array now //
-                /////////////////////////////////////
+                // ///////////////////////////////////
                 if (count($obsolete_lemmas) > 0) {
                     $display_already_comment = true;
                     $something_to_do = true;
@@ -495,7 +475,8 @@ class LocalizationMissing extends LocalizationAbstract
                 if ($this->option('output-flat')) {
                     $final_lemmas = Arr::dot($final_lemmas);
                 }
-                if (($something_to_do === true) || $this->option('force')) {
+
+                if (($something_to_do) || $this->option('force')) {
                     if ($lang_file->getTypeJson()) {
                         unset($final_lemmas['POTSKY___NEW___POTSKY']);
                         $file_content = json_encode($final_lemmas);
@@ -511,7 +492,7 @@ class LocalizationMissing extends LocalizationAbstract
                             ],
                             [
                                 '//============================== New strings to translate ==============================//',
-                                ($display_already_comment === true) ? '//==================================== Translations ====================================//' : '',
+                                ($display_already_comment) ? '//==================================== Translations ====================================//' : '',
                                 '//============================== Dynamic protected strings =============================//',
                                 '//================================== Obsolete strings ==================================//',
                             ],
@@ -520,13 +501,14 @@ class LocalizationMissing extends LocalizationAbstract
 
                         $file_content = "<?php\n";
 
-                        if (!$this->option('no-date')) {
+                        if (! $this->option('no-date')) {
                             $a = ' Generated via "php artisan '.$this->argument('command').'" at '.date('Y/m/d H:i:s').' ';
                             $file_content .= '/'.str_repeat('*', strlen($a))."\n".$a."\n".str_repeat('*', strlen($a))."/\n";
                         }
 
                         $file_content .= "\nreturn ".$content.';';
                     }
+
                     $job[$lang_file->getFilePath()] = $file_content;
                 } else {
                     if ($this->option('verbose')) {
@@ -535,23 +517,25 @@ class LocalizationMissing extends LocalizationAbstract
                 }
             }
         }
-        ///////////////////////////////////////////
+
+        // /////////////////////////////////////////
         // Silent mode                           //
         // only return an exit code on new lemma //
-        ///////////////////////////////////////////
+        // /////////////////////////////////////////
         if ($this->option('silent')) {
-            if ($there_are_new === true) {
+            if ($there_are_new) {
                 return self::ERROR;
-            } else {
-                // @codeCoverageIgnoreStart
-                return self::SUCCESS;
-                // @codeCoverageIgnoreEnd
             }
+
+            // @codeCoverageIgnoreStart
+            return self::SUCCESS;
+            // @codeCoverageIgnoreEnd
+
         }
 
-        ///////////////////////////////////////////
+        // /////////////////////////////////////////
         // Normal mode                           //
-        ///////////////////////////////////////////
+        // /////////////////////////////////////////
         if (count($job) > 0) {
             if ($this->option('no-interaction')) {
                 $do = true;
@@ -562,10 +546,11 @@ class LocalizationMissing extends LocalizationAbstract
                 $do = ($this->ask('Do you wish to apply these changes now? [yes|no]') === 'yes');
                 $this->writeLine('');
             }
+
             // @codeCoverageIgnoreEnd
 
-            if ($do === true) {
-                if (!$this->option('no-backup')) {
+            if ($do) {
+                if (! $this->option('no-backup')) {
                     $this->writeLine('Backup files:');
 
                     $now = $this->manager->getBackupDate();
@@ -573,7 +558,7 @@ class LocalizationMissing extends LocalizationAbstract
                     foreach ($job as $file_lang_path => $file_content) {
                         $backup_path = $this->manager->getBackupPath($file_lang_path, $now, $extension);
 
-                        if (!$this->option('dry-run')) {
+                        if (! $this->option('dry-run')) {
                             rename($file_lang_path, $backup_path);
                         }
 
@@ -587,28 +572,17 @@ class LocalizationMissing extends LocalizationAbstract
                 $open_files = '';
 
                 foreach ($job as $file_lang_path => $file_content) {
-                    if (!$this->option('dry-run')) {
+                    if (! $this->option('dry-run')) {
                         file_put_contents($file_lang_path, $file_content);
                     }
 
                     $this->writeLine('    <info>'.$this->manager->getShortPath($file_lang_path).'</info>');
 
-                    // Fix code style
-                    if ((!empty($this->code_style_level)) || (!empty($this->code_style_fixers))) {
-                        try {
-                            $this->manager->fixCodeStyle($file_lang_path, $this->code_style_fixers, $this->code_style_level);
-                        }
-                        // @codeCoverageIgnoreStart
-                        catch (Exception $e) {
-                            $this->writeError('    Cannot fix code style ('.$e->getMessage().')');
-                        }
-                        // @codeCoverageIgnoreEnd
-                    }
-
                     // @codeCoverageIgnoreStart
                     if ($this->option('editor')) {
                         $open_files .= ' '.escapeshellarg($file_lang_path);
                     }
+
                     // @codeCoverageIgnoreEnd
                 }
 
@@ -619,9 +593,10 @@ class LocalizationMissing extends LocalizationAbstract
                 if ($this->option('editor')) {
                     exec($this->editor.$open_files);
                 }
-            // @codeCoverageIgnoreEnd
 
-            // @codeCoverageIgnoreStart
+                // @codeCoverageIgnoreEnd
+
+                // @codeCoverageIgnoreStart
             } else {
                 $this->writeLine('');
                 $this->writeComment('Process aborted. No file has been changed.');
@@ -632,6 +607,7 @@ class LocalizationMissing extends LocalizationAbstract
             $this->writeLine('');
             $this->writeInfo('Drink a Piña colada and/or smoke Super Skunk, you have nothing to do!');
         }
+
         $this->writeLine('');
 
         return self::SUCCESS;
@@ -642,6 +618,7 @@ class LocalizationMissing extends LocalizationAbstract
      *
      * @return array
      */
+    #[\Override]
     protected function getArguments()
     {
         return [];
@@ -652,6 +629,7 @@ class LocalizationMissing extends LocalizationAbstract
      *
      * @return array
      */
+    #[\Override]
     protected function getOptions()
     {
         return [

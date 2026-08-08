@@ -8,21 +8,21 @@ class Translator implements TranslatorInterface
     protected $translator;
 
     /**
-     * @param string $translator The translation service name
-     * @param array  $config     The configuration array for the translation service
+     * @param  string  $translator  The translation service name
+     * @param  array  $config  The configuration array for the translation service
      *
-     * @throws \Potsky\LaravelLocalizationHelpers\Factory\Exception
+     * @throws Exception
      */
     public function __construct($translator, $config = [])
     {
-        $class = 'Potsky\LaravelLocalizationHelpers\Factory\Translator'.$translator;
+        $class = Translator::class.$translator;
         $translator = new $class($config);
 
-        if (!$translator instanceof TranslatorInterface) {
-            //@codeCoverageIgnoreStart
+        if (! $translator instanceof TranslatorInterface) {
+            // @codeCoverageIgnoreStart
             // Cannot test a Fatal Error in PHPUnit by invoking non existing class...
             throw new Exception('Provided translator does not implement TranslatorInterface');
-            //@codeCoverageIgnoreEnd
+            // @codeCoverageIgnoreEnd
         }
 
         $this->translator = $translator;
@@ -36,7 +36,7 @@ class Translator implements TranslatorInterface
     /**
      * Return the used translator.
      *
-     * @return \Potsky\LaravelLocalizationHelpers\Factory\TranslatorInterface
+     * @return TranslatorInterface
      */
     public function getTranslator()
     {

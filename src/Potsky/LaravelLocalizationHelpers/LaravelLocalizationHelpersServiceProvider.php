@@ -3,6 +3,10 @@
 namespace Potsky\LaravelLocalizationHelpers;
 
 use Illuminate\Support\ServiceProvider;
+use Potsky\LaravelLocalizationHelpers\Command\LocalizationClear;
+use Potsky\LaravelLocalizationHelpers\Command\LocalizationFind;
+use Potsky\LaravelLocalizationHelpers\Command\LocalizationMissing;
+use Potsky\LaravelLocalizationHelpers\Factory\Localization;
 
 class LaravelLocalizationHelpersServiceProvider extends ServiceProvider
 {
@@ -16,11 +20,10 @@ class LaravelLocalizationHelpersServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application events.
      *
-     * @return void
      *
      * @codeCoverageIgnore
      */
-    public function boot()
+    public function boot(): void
     {
         if (function_exists('config_path')) {
             $this->publishes([
@@ -32,23 +35,17 @@ class LaravelLocalizationHelpersServiceProvider extends ServiceProvider
     /**
      * Register the service provider.
      *
-     * @return void
      *
      * @codeCoverageIgnore
      */
-    public function register()
+    #[\Override]
+    public function register(): void
     {
-        $this->app->singleton('localization.command.missing', function ($app) {
-            return new Command\LocalizationMissing($app['config']);
-        });
+        $this->app->singleton('localization.command.missing', fn ($app): LocalizationMissing => new LocalizationMissing($app['config']));
 
-        $this->app->singleton('localization.command.find', function ($app) {
-            return new Command\LocalizationFind($app['config']);
-        });
+        $this->app->singleton('localization.command.find', fn ($app): LocalizationFind => new LocalizationFind($app['config']));
 
-        $this->app->singleton('localization.command.clear', function ($app) {
-            return new Command\LocalizationClear($app['config']);
-        });
+        $this->app->singleton('localization.command.clear', fn ($app): LocalizationClear => new LocalizationClear($app['config']));
 
         $this->commands(
             'localization.command.missing',
@@ -56,9 +53,7 @@ class LaravelLocalizationHelpersServiceProvider extends ServiceProvider
             'localization.command.clear'
         );
 
-        $this->app->singleton('localization.helpers', function ($app) {
-            return new Factory\Localization(new Factory\MessageBag());
-        });
+        $this->app->singleton('localization.helpers', fn ($app): Localization => new Localization(new Factory\MessageBag));
 
         $this->mergeConfigFrom(
             __DIR__.'/../../config/config.php',

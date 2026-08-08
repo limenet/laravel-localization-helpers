@@ -31,8 +31,6 @@ class LocalizationClear extends LocalizationAbstract
 
     /**
      * Create a new command instance.
-     *
-     * @param \Illuminate\Config\Repository $configRepository
      */
     public function __construct(Repository $configRepository)
     {
@@ -43,10 +41,8 @@ class LocalizationClear extends LocalizationAbstract
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+    public function handle(): int
     {
         $days = (int) $this->option('days');
 
@@ -66,6 +62,7 @@ class LocalizationClear extends LocalizationAbstract
      *
      * @return array
      */
+    #[\Override]
     protected function getArguments()
     {
         return [];
@@ -76,6 +73,7 @@ class LocalizationClear extends LocalizationAbstract
      *
      * @return array
      */
+    #[\Override]
     protected function getOptions()
     {
         return [

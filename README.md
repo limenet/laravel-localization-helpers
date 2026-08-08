@@ -2,17 +2,14 @@
 
 [![Latest Stable Version](https://poser.pugx.org/potsky/laravel-localization-helpers/v/stable.svg)](https://packagist.org/packages/potsky/laravel-localization-helpers)
 [![Latest Unstable Version](https://poser.pugx.org/potsky/laravel-localization-helpers/v/unstable.svg)](https://packagist.org/packages/potsky/laravel-localization-helpers)
-[![Build Status](https://travis-ci.org/potsky/laravel-localization-helpers.svg)](https://travis-ci.org/potsky/laravel-localization-helpers)
-[![Coverage Status](https://coveralls.io/repos/potsky/laravel-localization-helpers/badge.svg?service=github)](https://coveralls.io/github/potsky/laravel-localization-helpers)
+[![Tests](https://github.com/limenet/laravel-localization-helpers/actions/workflows/php.yml/badge.svg)](https://github.com/limenet/laravel-localization-helpers/actions/workflows/php.yml)
 [![Total Downloads](https://poser.pugx.org/potsky/laravel-localization-helpers/downloads.svg)](https://packagist.org/packages/potsky/laravel-localization-helpers)
-[![Stories in Ready](https://badge.waffle.io/potsky/laravel-localization-helpers.png?label=ready&title=Ready)](https://waffle.io/potsky/laravel-localization-helpers)
 
 ## This branch is the current dev branch
 
 LLH is a set of artisan commands to manage translations in your Laravel project. Key features :
 
 - parse your code and generate lang files
-- configure output according to your code style
 
 ## Table of contents
 
@@ -28,30 +25,25 @@ LLH is a set of artisan commands to manage translations in your Laravel project.
 
 - Choose your version according to the version compatibility matrix:
 
-| Laravel | Lumen | Package                           |
-| :------ | :---- | :-------------------------------- |
-| 4.2.x   |       | 2.0.x (EOL last version is 2.0.4) |
-| 5.0.x   |       | 2.1.x                             |
-| 5.1.x   | 5.1.x | 2.2.x                             |
-| 5.2.x   | 5.2.x | 2.3.x                             |
-| 5.3.x   | 5.3.x | 2.4.x                             |
-| 5.4.x   | 5.4.x | 2.5.x                             |
+| Laravel     | PHP   | Package                           |
+| :---------- | :---- | :-------------------------------- |
+| 12.x - 13.x | 8.4+  | 2.6.x                             |
+| 11.x - 12.x | 8.2+  | 2.5.x                             |
+| 5.4.x       |       | 2.5.x                             |
+| 5.3.x       |       | 2.4.x                             |
+| 5.2.x       |       | 2.3.x                             |
+| 5.1.x       |       | 2.2.x                             |
+| 5.0.x       |       | 2.1.x                             |
+| 4.2.x       |       | 2.0.x (EOL last version is 2.0.4) |
 
-- Add the following line in the `require-dev` array of the `composer.json` file and replace the version if needed according to your Laravel version:
+- Require the package as a dev dependency:
 
-  ```php
-  "potsky/laravel-localization-helpers" : "2.5.*"
+  ```sh
+  composer require --dev potsky/laravel-localization-helpers
   ```
 
-- Update your installation : `composer update`
-- For Laravel, add the following line in the `providers` array of the `config/app.php` configuration file :
-
-  ```php
-  Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class,
-  ```
-
-- For Lumen, add the following lines in the `bootstrap/app.php` file :
-  `php $app->register( Potsky\LaravelLocalizationHelpers\LaravelLocalizationHelpersServiceProvider::class ); $app->configure('laravel-localization-helpers');`
+The service provider is registered automatically through Laravel's package
+discovery, so no manual configuration is required.
 
 - Now execute `php artisan list` and you should view the new _localization_ commands:
   ```
@@ -387,10 +379,16 @@ Internally :
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-Tests are in `tests`. To run the tests: `vendor/bin/phpunit`.
+Tests are in `tests` and are written with [Pest](https://pestphp.com). To run the tests: `composer test`.
 
-Coverage cannot decrease next a merge. To track file coverage, run `vendor/bin/phpunit --coverage-html coverage` and open `coverage/index.html` to check uncovered lines of code.
+Coverage cannot decrease next a merge. To track file coverage, run `vendor/bin/pest --coverage-html coverage` and open `coverage/index.html` to check uncovered lines of code.
+
+Before opening a pull request, please run the code style and refactoring checks:
+
+```bash
+composer lint          # apply Pint code style
+composer refactor      # apply Rector refactorings
+```
 
 Dev badges :
-[![Dev Status](https://travis-ci.org/potsky/laravel-localization-helpers.svg?branch=dev)](https://travis-ci.org/potsky/laravel-localization-helpers)
-[![Dev Coverage Status](https://coveralls.io/repos/potsky/laravel-localization-helpers/badge.svg?branch=dev&service=github)](https://coveralls.io/github/potsky/laravel-localization-helpers?branch=dev)
+[![Tests](https://github.com/limenet/laravel-localization-helpers/actions/workflows/php.yml/badge.svg?branch=next)](https://github.com/limenet/laravel-localization-helpers/actions/workflows/php.yml)

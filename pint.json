@@ -1,0 +1,7 @@
+{
+    "preset": "laravel",
+    "exclude": [
+        "tests/lang",
+        "tests/mock"
+    ]
+}

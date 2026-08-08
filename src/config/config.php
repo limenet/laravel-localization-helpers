@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -16,7 +18,7 @@ return [
     | No error or exception is thrown when a folder does not exist.
     |
     */
-    'folders'             => [
+    'folders' => [
         '%BASE/resources/views',
         '%APP/Http/Controllers',
     ],
@@ -32,7 +34,7 @@ return [
     | - a specific file path like '/resources/lang/de/cms.php'
     |
     */
-    'ignore_lang_files'   => [
+    'ignore_lang_files' => [
         'validation',
     ],
 
@@ -47,7 +49,7 @@ return [
     | - then  in base_path() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'lang',
     |
     */
-    'lang_folder_path'    => null,
+    'lang_folder_path' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -58,16 +60,16 @@ return [
     | Several regular expressions can be used for a single method or function.
     |
     */
-    'trans_methods'       => [
-        'json'        => [
+    'trans_methods' => [
+        'json' => [
             '@__\(\s*(\'.*\')\s*(,.*)*\)@U',
             '@__\(\s*(".*")\s*(,.*)*\)@U',
         ],
-        'trans'        => [
+        'trans' => [
             '@trans\(\s*(\'.*\')\s*(,.*)*\)@U',
             '@trans\(\s*(".*")\s*(,.*)*\)@U',
         ],
-        'Lang::Get'    => [
+        'Lang::Get' => [
             '@Lang::Get\(\s*(\'.*\')\s*(,.*)*\)@U',
             '@Lang::Get\(\s*(".*")\s*(,.*)*\)@U',
             '@Lang::get\(\s*(\'.*\')\s*(,.*)*\)@U',
@@ -81,11 +83,11 @@ return [
             '@Lang::choice\(\s*(\'.*\')\s*,.*\)@U',
             '@Lang::choice\(\s*(".*")\s*,.*\)@U',
         ],
-        '@lang'        => [
+        '@lang' => [
             '@\@lang\(\s*(\'.*\')\s*(,.*)*\)@U',
             '@\@lang\(\s*(".*")\s*(,.*)*\)@U',
         ],
-        '@choice'      => [
+        '@choice' => [
             '@\@choice\(\s*(\'.*\')\s*,.*\)@U',
             '@\@choice\(\s*(".*")\s*,.*\)@U',
         ],
@@ -157,7 +159,7 @@ return [
     | clean up obsolete lemma manually
     |
     */
-    'obsolete_array_key'  => 'LLH:obsolete',
+    'obsolete_array_key' => 'LLH:obsolete',
 
     /*
     |--------------------------------------------------------------------------
@@ -171,33 +173,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Code Style
-    |--------------------------------------------------------------------------
-    |
-    | You can set a level and or fixers for the code style applied to the generated
-    | lang files. More informations about the accomplished job available here :
-    | http://cs.sensiolabs.org
-    |
-    | Level is one of null , '@PSR1' , '@PSR2' or '@Symfony'
-    |
-    | Fixers is an array one or several of these fixers : https://github.com/FriendsOfPHP/PHP-CS-Fixer#usage
-    |
-    | If both parameters are empty, no Code Style will be applied
-    */
-    'code_style'          => [
-        'level'  => null,
-        'fixers' => [],
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Translator
     |--------------------------------------------------------------------------
     |
     | Use the Microsoft translator by default. This is the only available translator now
     |
     */
-    'translator'          => 'Sample',
+    'translator' => 'Sample',
 
     /*
     |--------------------------------------------------------------------------
@@ -232,11 +214,11 @@ return [
     | - LLH_MICROSOFT_TRANSLATOR_CLIENT_SECRET
     |
     */
-    'translators'         => [
+    'translators' => [
         'Microsoft' => [
             'default_language' => null,
-            'client_id'        => null,
-            'client_secret'    => null,
+            'client_id' => null,
+            'client_secret' => null,
         ],
     ],
 

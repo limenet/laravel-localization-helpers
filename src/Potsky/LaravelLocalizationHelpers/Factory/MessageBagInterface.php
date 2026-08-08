@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Potsky\LaravelLocalizationHelpers\Factory;
 
 interface MessageBagInterface
@@ -7,8 +9,7 @@ interface MessageBagInterface
     /**
      * Add a simple message.
      *
-     * @param string $s the message to display
-     *
+     * @param  string  $s  the message to display
      * @return void
      */
     public function writeLine($s);
@@ -16,8 +17,7 @@ interface MessageBagInterface
     /**
      * Add an info message.
      *
-     * @param string $s the message to display
-     *
+     * @param  string  $s  the message to display
      * @return void
      */
     public function writeInfo($s);
@@ -25,8 +25,7 @@ interface MessageBagInterface
     /**
      * Add a comment message.
      *
-     * @param string $s the message to display
-     *
+     * @param  string  $s  the message to display
      * @return void
      */
     public function writeComment($s);
@@ -34,8 +33,7 @@ interface MessageBagInterface
     /**
      * Add a question message.
      *
-     * @param string $s the message to display
-     *
+     * @param  string  $s  the message to display
      * @return void
      */
     public function writeQuestion($s);
@@ -43,8 +41,7 @@ interface MessageBagInterface
     /**
      * Add an error message.
      *
-     * @param string $s the message to display
-     *
+     * @param  string  $s  the message to display
      * @return void
      */
     public function writeError($s);

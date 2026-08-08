@@ -10,6 +10,7 @@ use Potsky\LaravelLocalizationHelpers\Factory\MessageBagInterface;
 abstract class LocalizationAbstract extends Command implements MessageBagInterface
 {
     const SUCCESS = 0;
+
     const ERROR = 1;
 
     /**
@@ -18,18 +19,19 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
      * @var bool
      */
     protected static $logInFileFirst = true;
+
     /**
      * Config repository.
      *
-     * @var \Illuminate\Config\Repository
+     * @var Repository
      */
     protected $configRepository;
+
     /**
      * The localization manager.
-     *
-     * @var Localization
      */
-    protected $manager;
+    protected Localization $manager;
+
     /**
      * Should commands display something.
      *
@@ -39,25 +41,20 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
 
     /**
      * Create a new command instance.
-     *
-     * @param \Illuminate\Config\Repository $configRepository
      */
-    public function __construct(Repository $configRepository)
+    public function __construct()
     {
         // Inject this command just to have access to writeLine, writeError, etc... methods
         $this->manager = new Localization($this);
-
         parent::__construct();
     }
 
     /**
      * Display console message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeLine($s)
+    public function writeLine($s): void
     {
         if ($this->display) {
             parent::line($s);
@@ -67,11 +64,9 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeInfo($s)
+    public function writeInfo($s): void
     {
         if ($this->display) {
             parent::info($s);
@@ -81,11 +76,9 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeComment($s)
+    public function writeComment($s): void
     {
         if ($this->display) {
             parent::comment($s);
@@ -95,13 +88,11 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      *
      * @codeCoverageIgnore
      */
-    public function writeQuestion($s)
+    public function writeQuestion($s): void
     {
         if ($this->display) {
             parent::question($s);
@@ -111,11 +102,9 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
-     *
-     * @return void
+     * @param  string  $s  the message to display
      */
-    public function writeError($s)
+    public function writeError($s): void
     {
         if ($this->display) {
             parent::error($s);
@@ -125,14 +114,14 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Log in a file for debug purpose only.
      *
-     * @param mixed  $txt
-     * @param string $logFile
+     * @param  mixed  $txt
+     * @param  string  $logFile
      *
      * @codeCoverageIgnore
      */
     protected function logInFile($txt = '', $logFile = '/tmp/llh.log')
     {
-        if (!is_string($txt)) {
+        if (! is_string($txt)) {
             $txt = print_r($txt, true);
         }
 

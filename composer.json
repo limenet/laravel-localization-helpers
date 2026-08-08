@@ -4,31 +4,52 @@
   "authors": [
     {
       "name": "Potsky"
+    },
+    {
+      "name": "Linus Metzler",
+      "email": "linus.metzler@gmail.com"
     }
   ],
   "license": "GPL-3.0-or-later",
   "require": {
-    "illuminate/support": "^11.0 || ^12.0",
-    "friendsofphp/php-cs-fixer": "^3.0"
+    "php": "^8.4",
+    "illuminate/support": "^12.0 || ^13.0"
   },
   "require-dev": {
-    "orchestra/testbench": "^10.0.0",
-    "phpunit/phpunit": "^11.5.10",
+    "orchestra/testbench": "^10.11 || ^11.1",
+    "pestphp/pest": "^4.7.8",
+    "pestphp/pest-plugin-laravel": "^4.1",
     "mockery/mockery": "^1.6.12",
-    "php-coveralls/php-coveralls": "^2.7"
+    "laravel/pint": "^1.30.4",
+    "rector/rector": "^2.6.1",
+    "driftingly/rector-laravel": "^2.5"
   },
   "autoload": {
     "psr-0": {
       "Potsky\\LaravelLocalizationHelpers\\": "src/"
     }
   },
+  "autoload-dev": {
+    "classmap": [
+      "tests/TestCase.php"
+    ]
+  },
   "scripts": {
-    "test": "vendor/bin/phpunit",
+    "test": "vendor/bin/pest",
+    "lint": "vendor/bin/pint",
+    "lint:test": "vendor/bin/pint --test",
+    "refactor": "vendor/bin/rector process",
+    "refactor:test": "vendor/bin/rector process --dry-run",
     "post-update-cmd": [
       "@composer bump -D"
     ]
   },
   "minimum-stability": "stable",
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
   "extra": {
     "laravel": {
       "providers": [
