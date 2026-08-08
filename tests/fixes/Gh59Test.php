@@ -22,10 +22,10 @@ test('default dot notation', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--verbose'        => true,
-        '--no-date'        => true,
-        '--no-comment'     => true,
+        '--no-backup' => true,
+        '--verbose' => true,
+        '--no-date' => true,
+        '--no-comment' => true,
     ]);
 
     $lemmas = require $this->langFile;
@@ -47,10 +47,10 @@ test('awesome dot notation', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--verbose'        => true,
-        '--no-date'        => true,
-        '--no-comment'     => true,
+        '--no-backup' => true,
+        '--verbose' => true,
+        '--no-date' => true,
+        '--no-comment' => true,
     ]);
 
     $lemmas = require $this->langFile;

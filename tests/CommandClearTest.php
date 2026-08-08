@@ -16,7 +16,7 @@ beforeEach(function (): void {
 
     Tools::unlinkGlobFiles(TestCase::LANG_DIR_PATH.'/*/message*.php');
 
-    $manager = new Localization(new MessageBag());
+    $manager = new Localization(new MessageBag);
 
     for ($i = 0; $i < 10; $i++) {
         $time = $manager->getBackupDate($i);
@@ -51,7 +51,7 @@ test('error days negative', function (): void {
     $return = Artisan::call('localization:clear', ['--days' => -3]);
     expect($return)->toEqual(1);
 
-    $manager = new Localization(new MessageBag());
+    $manager = new Localization(new MessageBag);
     expect($manager->deleteBackupFiles('', -3, true))->toBeFalse();
 });
 test('dry run', function (): void {

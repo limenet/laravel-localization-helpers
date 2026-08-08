@@ -217,8 +217,8 @@ return [
     'translators' => [
         'Microsoft' => [
             'default_language' => null,
-            'client_id'        => null,
-            'client_secret'    => null,
+            'client_id' => null,
+            'client_secret' => null,
         ],
     ],
 

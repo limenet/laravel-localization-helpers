@@ -4,7 +4,7 @@ use Potsky\LaravelLocalizationHelpers\Factory\Localization;
 use Potsky\LaravelLocalizationHelpers\Factory\MessageBag;
 
 test('dot in path', function (): void {
-    $messageBag = new MessageBag();
+    $messageBag = new MessageBag;
     $manager = new Localization($messageBag);
     $now = '20160129_202938';
 

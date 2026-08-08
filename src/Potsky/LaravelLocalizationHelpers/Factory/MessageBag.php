@@ -65,13 +65,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add a simple message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeLine($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!in_array($message, [null, '', '0'], true)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::LINE, $message];
         }
     }
@@ -79,13 +79,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add an info message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeInfo($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!in_array($message, [null, '', '0'], true)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::INFO, $message];
         }
     }
@@ -93,13 +93,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add a comment message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeComment($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!in_array($message, [null, '', '0'], true)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::COMMENT, $message];
         }
     }
@@ -107,13 +107,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add a question message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeQuestion($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!in_array($message, [null, '', '0'], true)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::QUESTION, $message];
         }
     }
@@ -121,13 +121,13 @@ class MessageBag implements MessageBagInterface
     /**
      * Add an error message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeError($s): void
     {
         $message = $this->cleanMessage($s);
 
-        if (!in_array($message, [null, '', '0'], true)) {
+        if (! in_array($message, [null, '', '0'], true)) {
             $this->bag[] = [self::ERROR, $message];
         }
     }
@@ -135,7 +135,7 @@ class MessageBag implements MessageBagInterface
     /**
      * Trim and remove all XML tags.
      *
-     * @param string $m the message to clean
+     * @param  string  $m  the message to clean
      */
     protected function cleanMessage($m): ?string
     {

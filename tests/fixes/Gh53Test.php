@@ -19,11 +19,11 @@ test('odd dynamic fields should not generate errors', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--verbose'        => true,
-        '--no-date'        => true,
-        '--no-comment'     => true,
-        '--dry-run'        => true,
+        '--no-backup' => true,
+        '--verbose' => true,
+        '--no-date' => true,
+        '--no-comment' => true,
+        '--dry-run' => true,
     ]);
 
     expect(Artisan::output())->toContain('Unable to understand string');

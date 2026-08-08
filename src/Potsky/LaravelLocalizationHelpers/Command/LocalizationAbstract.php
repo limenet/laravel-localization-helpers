@@ -52,7 +52,7 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeLine($s): void
     {
@@ -64,7 +64,7 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeInfo($s): void
     {
@@ -76,7 +76,7 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeComment($s): void
     {
@@ -88,7 +88,7 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      *
      * @codeCoverageIgnore
      */
@@ -102,7 +102,7 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Display console message.
      *
-     * @param string $s the message to display
+     * @param  string  $s  the message to display
      */
     public function writeError($s): void
     {
@@ -114,14 +114,14 @@ abstract class LocalizationAbstract extends Command implements MessageBagInterfa
     /**
      * Log in a file for debug purpose only.
      *
-     * @param mixed  $txt
-     * @param string $logFile
+     * @param  mixed  $txt
+     * @param  string  $logFile
      *
      * @codeCoverageIgnore
      */
     protected function logInFile($txt = '', $logFile = '/tmp/llh.log')
     {
-        if (!is_string($txt)) {
+        if (! is_string($txt)) {
             $txt = print_r($txt, true);
         }
 

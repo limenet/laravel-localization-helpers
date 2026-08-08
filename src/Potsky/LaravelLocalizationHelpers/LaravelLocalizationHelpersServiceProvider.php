@@ -53,7 +53,7 @@ class LaravelLocalizationHelpersServiceProvider extends ServiceProvider
             'localization.command.clear'
         );
 
-        $this->app->singleton('localization.helpers', fn ($app): Localization => new Localization(new Factory\MessageBag()));
+        $this->app->singleton('localization.helpers', fn ($app): Localization => new Localization(new Factory\MessageBag));
 
         $this->mergeConfigFrom(
             __DIR__.'/../../config/config.php',

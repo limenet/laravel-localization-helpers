@@ -33,8 +33,8 @@ test('obsolete key is not removed', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--no-date'        => true,
+        '--no-backup' => true,
+        '--no-date' => true,
     ]);
 
     expect(Artisan::output())->toContain('1 obsolete string');
@@ -50,9 +50,9 @@ test('obsolete key is removed when setting option', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--no-obsolete'    => true,
-        '--no-date'        => true,
+        '--no-backup' => true,
+        '--no-obsolete' => true,
+        '--no-date' => true,
     ]);
 
     expect(Artisan::output())->toContain('1 obsolete string');
@@ -68,9 +68,9 @@ test('dynamic field should not be obsolete when not adding anew lemma', function
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--verbose'        => true,
-        '--no-date'        => true,
+        '--no-backup' => true,
+        '--verbose' => true,
+        '--no-date' => true,
     ]);
 
     expect(File::get($this->langFile))->toEqual($this->defaultLangContent);
@@ -82,9 +82,9 @@ test('dynamic field should not be obsolete when adding anew lemma', function ():
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--verbose'        => true,
-        '--no-date'        => true,
+        '--no-backup' => true,
+        '--verbose' => true,
+        '--no-date' => true,
     ]);
 
     expect(require $this->langFile)->toHaveKey('section');

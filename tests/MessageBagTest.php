@@ -3,7 +3,7 @@
 use Potsky\LaravelLocalizationHelpers\Factory\MessageBag;
 
 test('message bag', function (): void {
-    $messageBag = new MessageBag();
+    $messageBag = new MessageBag;
     $messageBag->writeInfo('  <blah>this is a line</blah>  ');
     $messageBag->writeLine('  <blah>this is a line</blah>  ');
     $messageBag->writeError('  <blah>this is a line</blah>  ');

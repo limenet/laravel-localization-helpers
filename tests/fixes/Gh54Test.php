@@ -19,11 +19,11 @@ test('lang files are created when using dry run', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--verbose'        => true,
-        '--no-date'        => true,
-        '--no-comment'     => true,
-        '--dry-run'        => true,
+        '--no-backup' => true,
+        '--verbose' => true,
+        '--no-date' => true,
+        '--no-comment' => true,
+        '--dry-run' => true,
     ]);
 
     expect($this->langFile)->not->toBeFile();

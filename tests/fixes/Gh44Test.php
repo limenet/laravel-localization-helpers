@@ -25,10 +25,10 @@ test('specific file path in ignore configuration', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup'      => true,
-        '--verbose'        => true,
-        '--no-date'        => true,
-        '--no-comment'     => true,
+        '--no-backup' => true,
+        '--verbose' => true,
+        '--no-date' => true,
+        '--no-comment' => true,
     ]);
 
     expect($this->langValidationEnFile)->not->toBeFile();

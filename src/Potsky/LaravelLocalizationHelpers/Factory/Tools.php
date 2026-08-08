@@ -21,7 +21,7 @@ class Tools
     /**
      * Tell if the running Laravel installation is of the provided major version.
      *
-     * @param int $major
+     * @param  int  $major
      */
     public static function isLaravel($major): bool
     {
@@ -29,8 +29,7 @@ class Tools
     }
 
     /**
-     * @param string $glob a file glob
-     *
+     * @param  string  $glob  a file glob
      * @return array the list of deleted files
      */
     public static function unlinkGlobFiles($glob): array
@@ -43,7 +42,7 @@ class Tools
                 continue;
             }
 
-            if (!unlink($file)) {
+            if (! unlink($file)) {
                 continue;
             }
 
@@ -56,8 +55,8 @@ class Tools
     /**
      * Check if the "$dir_lang/$lang" is a valid directory.
      *
-     * @param string $dir_lang
-     * @param string $lang
+     * @param  string  $dir_lang
+     * @param  string  $lang
      */
     public static function isValidDirectory($dir_lang, $lang): bool
     {
@@ -75,11 +74,10 @@ class Tools
      *
      * The escape char before a dot is used to escape all dots next to the escaped dot
      *
-     * @param string $key
-     * @param mixed  $value
-     * @param string $regex
-     * @param int    $level
-     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @param  string  $regex
+     * @param  int  $level
      * @return array
      */
     public static function arraySet(array &$array, $key, $value, $regex = '/\\./', $level = -1)
@@ -96,7 +94,7 @@ class Tools
             // If the key doesn't exist at this depth, we will just create an empty array
             // to hold the next value, allowing us to create the arrays to hold final
             // values at the correct depth. Then we'll keep digging into the array.
-            if (!isset($array[$key]) || !is_array($array[$key])) {
+            if (! isset($array[$key]) || ! is_array($array[$key])) {
                 $array[$key] = [];
             }
 
@@ -111,7 +109,7 @@ class Tools
     /**
      * Return char 's' if argument is greater than 1.
      *
-     * @param float|int|string $number
+     * @param  float|int|string  $number
      */
     public static function getPlural($number): string
     {
