@@ -32,10 +32,10 @@ test('awesome dot notation', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup' => true,
-        '--no-date' => true,
-        '--no-comment' => true,
-        '--verbose' => true,
+        '--no-backup'      => true,
+        '--no-date'        => true,
+        '--no-comment'     => true,
+        '--verbose'        => true,
     ]);
 
     expect($this->langFileIncorrectGenuine)->not->toBeFile();

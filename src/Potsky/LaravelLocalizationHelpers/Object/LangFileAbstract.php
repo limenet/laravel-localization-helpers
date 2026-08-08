@@ -23,8 +23,8 @@ abstract class LangFileAbstract
     /**
      * LangFileAbstract constructor.
      *
-     * @param  string  $dir
-     * @param  string  $lang
+     * @param string $dir
+     * @param string $lang
      */
     public function __construct($dir, $lang)
     {
@@ -32,7 +32,8 @@ abstract class LangFileAbstract
     }
 
     /**
-     * @param  bool  $typeVendor
+     * @param bool $typeVendor
+     *
      * @return LangFileAbstract
      */
     public function setTypeVendor($typeVendor)
@@ -51,7 +52,8 @@ abstract class LangFileAbstract
     }
 
     /**
-     * @param  bool  $typeJson
+     * @param bool $typeJson
+     *
      * @return LangFileAbstract
      */
     public function setTypeJson($typeJson)
@@ -70,7 +72,8 @@ abstract class LangFileAbstract
     }
 
     /**
-     * @param  string  $filePath
+     * @param string $filePath
+     *
      * @return LangFileAbstract
      */
     public function setFilePath($filePath)
@@ -98,7 +101,8 @@ abstract class LangFileAbstract
     }
 
     /**
-     * @param  mixed  $lang
+     * @param mixed $lang
+     *
      * @return LangFileAbstract
      */
     public function setLang($lang)
@@ -125,7 +129,8 @@ abstract class LangFileAbstract
     }
 
     /**
-     * @param  mixed  $dir
+     * @param mixed $dir
+     *
      * @return LangFileAbstract
      */
     public function setDir($dir)
@@ -136,7 +141,8 @@ abstract class LangFileAbstract
     }
 
     /**
-     * @param  mixed  $family
+     * @param mixed $family
+     *
      * @return LangFileAbstract
      */
     public function setFamily($family)
@@ -155,7 +161,8 @@ abstract class LangFileAbstract
     }
 
     /**
-     * @param  mixed  $package
+     * @param mixed $package
+     *
      * @return LangFileAbstract
      */
     public function setPackage($package)

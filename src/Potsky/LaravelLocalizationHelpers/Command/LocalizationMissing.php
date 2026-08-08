@@ -114,7 +114,7 @@ class LocalizationMissing extends LocalizationAbstract
         $this->dot_notation_split_regex = config(Localization::PREFIX_LARAVEL_CONFIG.'dot_notation_split_regex');
         $this->json_languages = config(Localization::PREFIX_LARAVEL_CONFIG.'json_languages');
 
-        if (! is_string($this->dot_notation_split_regex)) {
+        if (!is_string($this->dot_notation_split_regex)) {
             // fallback to dot if provided regex is not a string
             $this->dot_notation_split_regex = '/\\./';
         }
@@ -131,7 +131,7 @@ class LocalizationMissing extends LocalizationAbstract
     public function handle(): int
     {
         $folders = $this->manager->getPath($this->folders);
-        $this->display = ! $this->option('silent');
+        $this->display = !$this->option('silent');
         $extension = $this->option('php-file-extension');
         $obsolete_prefix = (empty($this->obsolete_array_key)) ? '' : $this->obsolete_array_key.'.';
 
@@ -261,8 +261,8 @@ class LocalizationMissing extends LocalizationAbstract
 
                 $this->writeLine('    '.$lang_file->getShortFilePath());
 
-                if (! $this->option('dry-run')) {
-                    if (! $lang_file->ensureFolder()) {
+                if (!$this->option('dry-run')) {
+                    if (!$lang_file->ensureFolder()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to create directory '.$lang_file->getFileFolderPath());
 
@@ -270,7 +270,7 @@ class LocalizationMissing extends LocalizationAbstract
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (! $lang_file->isFolderWritable()) {
+                    if (!$lang_file->isFolderWritable()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to write file in directory '.$lang_file->getFileFolderPath());
 
@@ -278,13 +278,13 @@ class LocalizationMissing extends LocalizationAbstract
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (! $lang_file->fileExists()) {
+                    if (!$lang_file->fileExists()) {
                         // @codeCoverageIgnoreStart
                         $this->writeInfo('    > File has been created');
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (! $lang_file->touch()) {
+                    if (!$lang_file->touch()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to touch file '.$lang_file->getFilePath());
 
@@ -292,7 +292,7 @@ class LocalizationMissing extends LocalizationAbstract
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (! $lang_file->isReadable()) {
+                    if (!$lang_file->isReadable()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to read file '.$lang_file->getFilePath());
 
@@ -300,7 +300,7 @@ class LocalizationMissing extends LocalizationAbstract
                         // @codeCoverageIgnoreEnd
                     }
 
-                    if (! $lang_file->isWritable()) {
+                    if (!$lang_file->isWritable()) {
                         // @codeCoverageIgnoreStart
                         $this->writeError('    > Unable to write in file '.$lang_file->getFilePath());
 
@@ -324,7 +324,7 @@ class LocalizationMissing extends LocalizationAbstract
                 foreach ($old_lemmas_with_obsolete as $key => $value) {
                     if (Str::startsWith($key, $obsolete_prefix)) {
                         $key = substr($key, $obsolete_prefix_length);
-                        if (! isset($old_lemmas[$key])) {
+                        if (!isset($old_lemmas[$key])) {
                             $old_lemmas[$key] = $value;
                         }
                     } else {
@@ -381,7 +381,7 @@ class LocalizationMissing extends LocalizationAbstract
                             $this->writeLine('            <info>'.$key.'</info> in '.$this->manager->getShortPath($value));
                         }
 
-                        if (! $this->option('no-comment')) {
+                        if (!$this->option('no-comment')) {
                             $final_lemmas['POTSKY___COMMENT___POTSKY'.$i] = "Defined in file $value";
                             $i += 1;
                         }
@@ -428,7 +428,7 @@ class LocalizationMissing extends LocalizationAbstract
                     // Remove all dynamic fields
                     foreach ($obsolete_lemmas as $key => $value) {
                         foreach ($this->never_obsolete_keys as $remove) {
-                            if ((str_contains($key, '.'.$remove.'.')) || Str::startsWith($key, $remove.'.')) {
+                            if (str_contains($key, '.'.$remove.'.') || Str::startsWith($key, $remove.'.')) {
                                 if ($this->option('verbose')) {
                                     $this->writeLine('        <comment>'.$key.'</comment> is protected as a dynamic lemma');
                                 }
@@ -476,7 +476,7 @@ class LocalizationMissing extends LocalizationAbstract
                     $final_lemmas = Arr::dot($final_lemmas);
                 }
 
-                if (($something_to_do) || $this->option('force')) {
+                if ($something_to_do || $this->option('force')) {
                     if ($lang_file->getTypeJson()) {
                         unset($final_lemmas['POTSKY___NEW___POTSKY']);
                         $file_content = json_encode($final_lemmas);
@@ -501,7 +501,7 @@ class LocalizationMissing extends LocalizationAbstract
 
                         $file_content = "<?php\n";
 
-                        if (! $this->option('no-date')) {
+                        if (!$this->option('no-date')) {
                             $a = ' Generated via "php artisan '.$this->argument('command').'" at '.date('Y/m/d H:i:s').' ';
                             $file_content .= '/'.str_repeat('*', strlen($a))."\n".$a."\n".str_repeat('*', strlen($a))."/\n";
                         }
@@ -530,7 +530,6 @@ class LocalizationMissing extends LocalizationAbstract
             // @codeCoverageIgnoreStart
             return self::SUCCESS;
             // @codeCoverageIgnoreEnd
-
         }
 
         // /////////////////////////////////////////
@@ -550,7 +549,7 @@ class LocalizationMissing extends LocalizationAbstract
             // @codeCoverageIgnoreEnd
 
             if ($do) {
-                if (! $this->option('no-backup')) {
+                if (!$this->option('no-backup')) {
                     $this->writeLine('Backup files:');
 
                     $now = $this->manager->getBackupDate();
@@ -558,7 +557,7 @@ class LocalizationMissing extends LocalizationAbstract
                     foreach ($job as $file_lang_path => $file_content) {
                         $backup_path = $this->manager->getBackupPath($file_lang_path, $now, $extension);
 
-                        if (! $this->option('dry-run')) {
+                        if (!$this->option('dry-run')) {
                             rename($file_lang_path, $backup_path);
                         }
 
@@ -572,7 +571,7 @@ class LocalizationMissing extends LocalizationAbstract
                 $open_files = '';
 
                 foreach ($job as $file_lang_path => $file_content) {
-                    if (! $this->option('dry-run')) {
+                    if (!$this->option('dry-run')) {
                         file_put_contents($file_lang_path, $file_content);
                     }
 

@@ -19,11 +19,11 @@ test('when akey is used to access an array and not astring', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup' => true,
-        '--verbose' => true,
-        '--no-date' => true,
-        '--no-comment' => true,
-        '--dry-run' => true,
+        '--no-backup'      => true,
+        '--verbose'        => true,
+        '--no-date'        => true,
+        '--no-comment'     => true,
+        '--dry-run'        => true,
     ]);
 
     $output = Artisan::output();
@@ -38,11 +38,11 @@ test('when akey accessing an array was used', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup' => true,
-        '--verbose' => true,
-        '--no-date' => true,
-        '--no-comment' => true,
-        '--dry-run' => true,
+        '--no-backup'      => true,
+        '--verbose'        => true,
+        '--no-date'        => true,
+        '--no-comment'     => true,
+        '--dry-run'        => true,
     ]);
 
     $output = Artisan::output();

@@ -31,7 +31,7 @@ test('search for regex lemma', function (): void {
     expect($return)->toEqual(0);
     expect(Artisan::output())->toContain('has been found in');
 
-    $messageBag = new MessageBag;
+    $messageBag = new MessageBag();
     $manager = new Localization($messageBag);
 
     $trans_methods = [

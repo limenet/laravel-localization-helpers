@@ -51,9 +51,9 @@ test('obsolete sub key removed', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup' => true,
-        '--verbose' => true,
-        '--no-date' => true,
+        '--no-backup'      => true,
+        '--verbose'        => true,
+        '--no-date'        => true,
     ]);
 
     expect(Artisan::output())->toContain('1 obsolete string');
@@ -69,8 +69,8 @@ test('obsolete are kept', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup' => true,
-        '--no-date' => true,
+        '--no-backup'      => true,
+        '--no-date'        => true,
     ]);
 
     expect(Artisan::output())->toContain('1 obsolete string');

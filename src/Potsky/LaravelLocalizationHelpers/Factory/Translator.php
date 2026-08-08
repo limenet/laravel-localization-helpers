@@ -8,8 +8,8 @@ class Translator implements TranslatorInterface
     protected $translator;
 
     /**
-     * @param  string  $translator  The translation service name
-     * @param  array  $config  The configuration array for the translation service
+     * @param string $translator The translation service name
+     * @param array  $config     The configuration array for the translation service
      *
      * @throws Exception
      */
@@ -18,7 +18,7 @@ class Translator implements TranslatorInterface
         $class = Translator::class.$translator;
         $translator = new $class($config);
 
-        if (! $translator instanceof TranslatorInterface) {
+        if (!$translator instanceof TranslatorInterface) {
             // @codeCoverageIgnoreStart
             // Cannot test a Fatal Error in PHPUnit by invoking non existing class...
             throw new Exception('Provided translator does not implement TranslatorInterface');

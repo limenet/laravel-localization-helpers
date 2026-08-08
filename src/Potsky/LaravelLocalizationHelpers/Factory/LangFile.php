@@ -19,8 +19,8 @@ class LangFile
     protected static $vendorsFolders = ['vendor', 'packages'];
 
     /**
-     * @param  string  $dir_lang
-     * @param  array  $json_langs
+     * @param string $dir_lang
+     * @param array  $json_langs
      */
     public static function getLangFiles($dir_lang, $json_langs = null): array
     {
@@ -28,7 +28,7 @@ class LangFile
 
         // scan genuine folders first
         foreach (scandir($dir_lang) as $lang) {
-            if (! Tools::isValidDirectory($dir_lang, $lang)) {
+            if (!Tools::isValidDirectory($dir_lang, $lang)) {
                 continue;
             }
 

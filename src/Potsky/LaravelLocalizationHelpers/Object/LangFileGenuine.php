@@ -7,9 +7,9 @@ class LangFileGenuine extends LangFileAbstract
     /**
      * LangFileGenuine constructor.
      *
-     * @param  string  $dir
-     * @param  string  $lang
-     * @param  string  $family
+     * @param string $dir
+     * @param string $lang
+     * @param string $family
      */
     public function __construct($dir, $lang, $family)
     {

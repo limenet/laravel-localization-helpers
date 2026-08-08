@@ -21,10 +21,10 @@ test('obsolete strings should return in main array', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup' => true,
-        '--verbose' => true,
-        '--no-date' => true,
-        '--no-comment' => true,
+        '--no-backup'      => true,
+        '--verbose'        => true,
+        '--no-date'        => true,
+        '--no-comment'     => true,
     ]);
 
     $lemmas = require $this->langFile;
@@ -32,11 +32,11 @@ test('obsolete strings should return in main array', function (): void {
 
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
-        '--no-interaction' => true,
-        '--no-backup' => true,
-        '--verbose' => true,
-        '--no-date' => true,
-        '--no-comment' => true,
+        '--no-interaction'     => true,
+        '--no-backup'          => true,
+        '--verbose'            => true,
+        '--no-date'            => true,
+        '--no-comment'         => true,
         '--php-file-extension' => 'copy',
     ]);
 
@@ -48,10 +48,10 @@ test('obsolete strings should return in main array', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup' => true,
-        '--verbose' => true,
-        '--no-date' => true,
-        '--no-comment' => true,
+        '--no-backup'      => true,
+        '--verbose'        => true,
+        '--no-date'        => true,
+        '--no-comment'     => true,
     ]);
 
     $lemmas = require $this->langFile;

@@ -68,8 +68,8 @@ test('flat output', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--output-flat' => true,
-        '--new-value' => '%LEMMA POTSKY',
+        '--output-flat'    => true,
+        '--new-value'      => '%LEMMA POTSKY',
     ]);
 
     expect($return)->toEqual(0);
@@ -82,8 +82,8 @@ test('translation fallback', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--output-flat' => true,
-        '--new-value' => 'nUll',
+        '--output-flat'    => true,
+        '--new-value'      => 'nUll',
     ]);
 
     expect($return)->toEqual(0);
@@ -96,8 +96,8 @@ test('translations', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--output-flat' => true,
-        '--translation' => true,
+        '--output-flat'    => true,
+        '--translation'    => true,
     ]);
 
     expect($return)->toEqual(0);
@@ -111,7 +111,7 @@ test('verbose', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--verbose' => true,
+        '--verbose'        => true,
     ]);
 
     expect($return)->toEqual(0);
@@ -120,7 +120,7 @@ test('verbose', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--verbose' => true,
+        '--verbose'        => true,
     ]);
 
     expect($return)->toEqual(0);
@@ -132,7 +132,7 @@ test('nothing to do', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--verbose' => true,
+        '--verbose'        => true,
     ]);
 
     expect($return)->toEqual(0);
@@ -142,7 +142,7 @@ test('obsolete lemma', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--no-backup' => true,
+        '--no-backup'      => true,
     ]);
 
     expect($return)->toEqual(0);
@@ -152,10 +152,10 @@ test('obsolete lemma', function (): void {
 
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
-        '--no-interaction' => true,
-        '--verbose' => true,
+        '--no-interaction'     => true,
+        '--verbose'            => true,
         '--php-file-extension' => 'copy',
-        '--no-backup' => true,
+        '--no-backup'          => true,
     ]);
 
     expect($return)->toEqual(0);
@@ -170,7 +170,7 @@ test('silent', function (): void {
     /** @noinspection PhpVoidFunctionResultUsedInspection */
     $return = Artisan::call('localization:missing', [
         '--no-interaction' => true,
-        '--silent' => true,
+        '--silent'         => true,
     ]);
 
     // Exit code is 1 because there are new lemma to translate
